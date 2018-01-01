@@ -5,6 +5,7 @@
 
 import os
 import re
+import json
 import subprocess
 from urllib.parse import urljoin
 
@@ -39,30 +40,41 @@ class ProjectInfo(object):
         'fingerprint': {}
     }
 
-    def __init__(self, target_project_path, static_path, web_static_root):
+    def __init__(self, framework_name, target_project_path, static_path, web_static_root):
         self.target_project_path = os.path.realpath(target_project_path)
         if not os.path.isabs(static_path):
             static_path = os.path.join(self.target_project_path, static_path)
         self.static_path = static_path
         self.web_static_root = web_static_root
         self.version_lst = self.all_version()
+        self.make_result(framework_name)
+
+
+    def make_result(self, framework_name):
+        """Make info_result."""
         self.info_result = self.default_info_result
+        self.info_result['framework'] = framework_name
+        self.add_alias(framework_name)
+        self.set_versions()
+        self.last_hash()
+        self.make_diff()
 
 
     def _git_exec(self, *args, decode=True):
-        """Done 'git' command.
-        """
-
+        """Done 'git' command."""
         master_program = 'git'
         command_tup = (master_program, *args)
         output = subprocess.check_output(command_tup, cwd=self.target_project_path)
         return output.decode() if decode else output
 
 
-    def all_version(self):
-        """Get all version of project by 'git tag'.
-        """
+    def set_versions(self):
+        """Set self.info_result['versions']."""
+        self.info_result['versions'] = [version.vstring for version in self.version_lst]
 
+
+    def all_version(self):
+        """Get all version of project by 'git tag'."""
         cmd_result = self._git_exec('tag', decode=True)
         lines = cmd_result.split('\n')
         # Some versions like Alpha(1.9a), Beta(1.9b) is out of consider.
@@ -74,9 +86,7 @@ class ProjectInfo(object):
 
 
     def last_static(self):
-        """all static files in last version.
-        """
-
+        """all static files in last version."""
         static_files = []
         for (root, _, filenames) in os.walk(self.static_path, followlinks=False):
             for filename in filenames:
@@ -85,9 +95,7 @@ class ProjectInfo(object):
 
 
     def last_hash(self):
-        """Get all static file's hash string.
-        """
-
+        """Get all static file's hash string."""
         static_file_lst = self.last_static()
         last_ver = str(self.version_lst[0])
         base_path_length = len(self.static_path)
@@ -98,13 +106,10 @@ class ProjectInfo(object):
             relative_path = filepath[base_path_length:].strip(os.path.sep)
             web_file_path = urljoin(self.web_static_root, relative_path)
             _dic_link[web_file_path] = md5_string
-        return _dic_link
 
 
-    def diff(self):
-        """Comparison between versions one by one.
-        """
-
+    def make_diff(self):
+        """Comparison between versions one by one."""
         for version, prev_version in zip(self.version_lst, self.version_lst[1:]):
             new, old = version.vstring, prev_version.vstring
             output = self._git_exec('diff', '--name-only', new, old,
@@ -119,9 +124,7 @@ class ProjectInfo(object):
 
 
     def ancestor_file(self, vstring, filepath):
-        """return the hash of file in one version.
-        """
-
+        """return the hash of file in one version."""
         args = ('show', '{}:{}'.format(vstring, filepath))
         try:
             output = self._git_exec(*args, decode=False)
@@ -134,7 +137,12 @@ class ProjectInfo(object):
 
 
     def add_alias(self, *alias):
-        """Add alias to info_result['alias'].
-        """
-
+        """Add alias to info_result['alias']."""
         self.info_result['alias'].extend(alias)
+
+
+    def dump_result(self, filename):
+        """Dump info_result to file."""
+        path = os.path.realpath(filename)
+        with open(path, 'w') as _fp:
+            json.dump(self.info_result, _fp, indent=4, sort_keys=True)
