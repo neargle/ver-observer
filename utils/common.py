@@ -35,3 +35,10 @@ def file_md5(filepath):
         for chunk in iter(lambda: file_.read(4096), b""):
             hash_md5.update(chunk)
     return hash_md5.hexdigest()
+
+
+def byte_md5(bstr):
+    """Return md5 string of byte string.
+    """
+
+    return hashlib.md5(bstr).hexdigest()
