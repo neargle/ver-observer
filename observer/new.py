@@ -103,14 +103,24 @@ class ProjectInfo(object):
         """Get all static file's hash string."""
         static_file_lst = self.last_static()
         last_ver = str(self.version_lst[0])
-        base_path_length = len(self.static_path)
         _dic_link = self.info_result['fingerprint'][last_ver] = {}
 
         for filepath in static_file_lst:
             md5_string = file_md5(filepath)
-            relative_path = filepath[base_path_length:].strip(os.path.sep)
-            web_file_path = urljoin(self.web_static_root, relative_path)
-            _dic_link[web_file_path] = md5_string
+            web_file = self.web_file_path(filepath)
+            _dic_link[web_file] = md5_string
+
+
+    def web_file_path(self, path_in_project):
+        """Return filepath in web application."""
+        if os.path.isabs(path_in_project):
+            base_path_length = len(self.static_path)
+        else:
+            base_path_length = len(
+                os.path.relpath(self.static_path, self.target_project_path)
+            )
+        relative_path = path_in_project[base_path_length:].strip(os.path.sep)
+        return urljoin(self.web_static_root, relative_path)
 
 
     def make_diff(self):
@@ -125,7 +135,8 @@ class ProjectInfo(object):
             _dic_link = self.info_result['fingerprint'][old] = {}
             for filename in filelst:
                 hash_string = self.ancestor_file(old, filename)
-                _dic_link[filename] = hash_string
+                web_file = self.web_file_path(filename)
+                _dic_link[web_file] = hash_string
 
 
     def ancestor_file(self, vstring, filepath):
