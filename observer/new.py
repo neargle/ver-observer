@@ -52,11 +52,15 @@ class ProjectInfo(object):
 
     def make_result(self, framework_name):
         """Make info_result."""
+        logger.info('functions has done. init the result and set the name and alias.')
         self.info_result = self.default_info_result
         self.info_result['framework'] = framework_name
         self.add_alias(framework_name)
+        logger.info('set the all versions.')
         self.set_versions()
+        logger.info('get hash string of all static file in last versions.')
         self.last_hash()
+        logger.info('diff the file version by version and get the info of different file.')
         self.make_diff()
 
 
@@ -64,7 +68,8 @@ class ProjectInfo(object):
         """Done 'git' command."""
         master_program = 'git'
         command_tup = (master_program, *args)
-        output = subprocess.check_output(command_tup, cwd=self.target_project_path)
+        output = subprocess.check_output(command_tup, cwd=self.target_project_path,
+                                         stderr=subprocess.STDOUT)
         return output.decode() if decode else output
 
 
@@ -129,8 +134,9 @@ class ProjectInfo(object):
         try:
             output = self._git_exec(*args, decode=False)
         except subprocess.CalledProcessError as ex:
-            logger.debug('This path is not exists on disk in version %s:%s', vstring, filepath)
-            logger.debug('error message: %s', ex)
+            logger.noise('this path is not exists on disk in version %s:%s', vstring, filepath)
+            logger.noise('subprocess error message: %s', ex)
+            logger.noise('stderr fatal message: %s', ex.output)
             return
         else:
             return byte_md5(output)
