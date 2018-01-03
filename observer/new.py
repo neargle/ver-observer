@@ -41,6 +41,11 @@ class ProjectInfo(object):
     }
 
     def __init__(self, framework_name, target_project_path, static_path, web_static_root):
+
+        target_project_path = os.path.expanduser(target_project_path)
+        static_path = os.path.expanduser(static_path)
+        web_static_root = os.path.expanduser(web_static_root)
+
         self.target_project_path = os.path.realpath(target_project_path)
         if not os.path.isabs(static_path):
             static_path = os.path.join(self.target_project_path, static_path)
@@ -163,3 +168,4 @@ class ProjectInfo(object):
         path = os.path.realpath(filename)
         with open(path, 'w') as _fp:
             json.dump(self.info_result, _fp, indent=4, sort_keys=True)
+

@@ -11,7 +11,6 @@ from utils.common import remove_blank
 from utils.common import IS_PY3
 
 
-
 def str2version(version):
     """to version"""
     if IS_PY3:
