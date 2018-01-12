@@ -11,6 +11,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
 from observer.plugin import file_distribute, search
 from utils.log import logger
+from utils.common import file_md5, byte_md5
 
 
 def file_distribute_test():
@@ -31,6 +32,14 @@ def file_distribute_test():
     django = search('django')
     distri = file_distribute(django)
     logger.info(distri)
+
+
+def mdf_of_file_and_byte_content_test():
+    logger.warning('mdf_of_file_and_byte_content_test start!')
+    filepath = './observer.py'
+    fbyte = open(filepath, 'rb').read()
+    assert (file_md5(filepath) == byte_md5(fbyte)) is True
+    logger.info('mdf_of_file_and_byte_content_test pass!')
 
 
 if __name__ == '__main__':
