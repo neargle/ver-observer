@@ -5,6 +5,7 @@
 
 import os
 import json
+from collections import Counter
 
 from utils.var import PLUGIN_PATH as plugin_path
 from utils.common import project_path
@@ -33,3 +34,19 @@ def search(alias):
     for plugin in all_plugin():
         if alias in plugin.get("alias"):
             return plugin
+
+
+def file_distribute(plugin_info):
+    """plugin_info: plugin info dictionary.
+    return file path and it's weight. Like {2:['n/e/a/r/g/l/e.css']}
+    """
+    all_filepath_in_fingerprint = []
+    distribution = {}
+    fingerprint = plugin_info.get('fingerprint')
+    for (_, version_fp) in fingerprint.items():
+        filepath_lst = version_fp.keys()
+        all_filepath_in_fingerprint.extend(filepath_lst)
+    counter_fp = Counter(all_filepath_in_fingerprint)
+    for filepath, weight in counter_fp.items():
+        distribution.setdefault(weight, set()).add(filepath)
+    return distribution
