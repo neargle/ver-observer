@@ -29,7 +29,6 @@ def remove_blank(txt):
 def file_md5(filepath):
     """Get file's md5 hash string.
     """
-
     hash_md5 = hashlib.md5()
     with open(filepath, "rb") as file_:
         for chunk in iter(lambda: file_.read(4096), b""):
@@ -40,5 +39,4 @@ def file_md5(filepath):
 def byte_md5(bstr):
     """Return md5 string of byte string.
     """
-
     return hashlib.md5(bstr).hexdigest()
