@@ -106,4 +106,4 @@ experiment/
 .vscode
 .DS_Store
 
-test_*
+/test_*
