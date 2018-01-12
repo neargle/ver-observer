@@ -10,7 +10,7 @@ import inspect
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
 from observer.plugin import file_distribute, search
-from utils.log import logger
+from utils.log import LOGGER as logger
 from utils.common import file_md5, byte_md5
 
 

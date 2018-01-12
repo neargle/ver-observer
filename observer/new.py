@@ -9,7 +9,7 @@ import json
 import subprocess
 from urllib.parse import urljoin
 
-from utils.log import logger
+from utils.log import LOGGER as logger
 from .version import str2version
 from . import file_hash, byte_hash
 
