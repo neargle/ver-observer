@@ -1,0 +1,6 @@
+requests
+
+# https://stackoverflow.com/questions/35405092/sslerror-sslv3-alert-handshake-failure
+pyOpenSSL
+ndg-httpsclient
+pyasn1
