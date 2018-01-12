@@ -9,9 +9,9 @@ import json
 import subprocess
 from urllib.parse import urljoin
 
-from utils.common import file_md5, byte_md5
 from utils.log import logger
 from .version import str2version
+from . import file_hash, byte_hash
 
 
 class ProjectInfo(object):
@@ -111,7 +111,7 @@ class ProjectInfo(object):
         _dic_link = self.info_result['fingerprint'][last_ver] = {}
 
         for filepath in static_file_lst:
-            md5_string = file_md5(filepath)
+            md5_string = file_hash(filepath)
             web_file = self.web_file_path(filepath)
             _dic_link[web_file] = md5_string
 
@@ -155,7 +155,7 @@ class ProjectInfo(object):
             logger.noise('stderr fatal message: %s', ex.output)
             return
         else:
-            return byte_md5(output)
+            return byte_hash(output)
 
 
     def add_alias(self, *alias):
