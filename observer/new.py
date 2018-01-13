@@ -15,7 +15,8 @@ from . import file_hash, byte_hash
 
 
 class ProjectInfo(object):
-    """Analyze git project infomation.
+    """
+    Analyze git project infomation.
 
     Create file like below :
     {

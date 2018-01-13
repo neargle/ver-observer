@@ -23,7 +23,8 @@ except ImportError:
 
 
 def file_distribute_test():
-    """return like:
+    """
+    Return like:
     {1: {'/static/admin/admin/js/vendor/jquery/LICENSE-JQUERY.txt'},
     2: {'/static/admin/admin/img/sorting-icons.gif',
     '/static/admin/admin/img/tooltag-add.svg',

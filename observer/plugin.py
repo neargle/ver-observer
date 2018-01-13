@@ -37,8 +37,10 @@ def search(alias):
 
 
 def file_distribute(plugin_info):
-    """plugin_info: plugin info dictionary.
-    return file path and it's weight. Like {2:['n/e/a/r/g/l/e.css']}
+    """
+    Return file path and it's weight. Like {2:['n/e/a/r/g/l/e.css']}
+
+    :param plugin_info: plugin info dictionary.
     """
     all_filepath_in_fingerprint = []
     distribution = {}
