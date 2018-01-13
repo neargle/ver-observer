@@ -53,8 +53,9 @@ def repeat_when_false(func, times):
     @functools.wraps(func)
     def _repeat_when_false(*args, **kwargs):
         ret = False
-        for _ in range(times):
+        for time in range(times):
             try:
+                logger.noise('try function: %s, time %s', func.__name__, str(time))
                 ret = func(*args, **kwargs)
             except Exception as ex:
                 logger.debug('exception in retry: %s', str(ex))
