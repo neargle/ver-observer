@@ -5,6 +5,7 @@
 
 import os
 import sys
+import json
 import inspect
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
@@ -212,7 +213,7 @@ def static_hash_map_test():
     distri = file_distribute(django)
     logger.info('file_distribute end.')
     map_ = static_hash_map(target_website, distri, depth=4)
-    logger.info(map_)
+    logger.info(json.dumps(map_, indent=4, sort_keys=True))
     logger.info('static_hash_map_test pass!')
 
 
