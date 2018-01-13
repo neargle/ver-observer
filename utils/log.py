@@ -5,7 +5,7 @@
 
 import os
 import ext.err_hunter as err_hunter
-from .common import project_path
+from .base import project_path
 
 
 _FILEPATH = os.path.join(project_path(), '/tmp/observer.log')

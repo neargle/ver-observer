@@ -8,6 +8,7 @@ import requests
 
 from utils.log import LOGGER as logger
 from utils.var import HTTP_HEADERS
+from utils.common import repeat_when_false
 from . import byte_hash
 
 
@@ -36,6 +37,7 @@ def static_hash_map(origin, distri, depth=4):
     return file_hash_map
 
 
+@repeat_when_false(4)
 def request_file_hash(url):
     """Return hash string of file by request url."""
     logger.debug('request get url: %s', url)

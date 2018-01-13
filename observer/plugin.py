@@ -8,7 +8,7 @@ import json
 from collections import Counter
 
 from utils.var import PLUGIN_PATH as plugin_path
-from utils.common import project_path
+from utils.base import project_path
 
 
 def all_plugin():

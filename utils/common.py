@@ -3,7 +3,6 @@
 # by nearg1e (nearg1e.com@gmail[dot]com)
 """ File: utils/common.py """
 
-import os
 import re
 import sys
 import random
@@ -20,11 +19,6 @@ IS_PY3 = sys.version_info[0] == 3
 def get_random_string(length=32, case_pool=digits+ascii_lowercase):
     """Return random string."""
     return ''.join([random.choice(case_pool) for _ in range(length)])
-
-
-def project_path():
-    """Return project path."""
-    return os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 
 def remove_blank(txt):
     """Remove blank from text."""
@@ -45,22 +39,24 @@ def byte_md5(bstr):
     return hashlib.md5(bstr).hexdigest()
 
 
-def repeat_when_false(func, times):
+def repeat_when_false(times=3):
     """
     Decorator for retrying function that will be easy to false and
     easy to true by retry.
     """
-    @functools.wraps(func)
-    def _repeat_when_false(*args, **kwargs):
-        ret = False
-        for time in range(times):
-            try:
-                logger.noise('try function: %s, time %s', func.__name__, str(time))
-                ret = func(*args, **kwargs)
-            except Exception as ex:
-                logger.debug('exception in retry: %s', str(ex))
-                ret = False
-            if ret:
-                break
-        return ret
-    return _repeat_when_false
+    def _decorator(func):
+        @functools.wraps(func)
+        def _repeat_when_false(*args, **kwargs):
+            ret = False
+            for time in range(times):
+                try:
+                    logger.noise('try function: %s, time %s', func.__name__, str(time))
+                    ret = func(*args, **kwargs)
+                except Exception as ex:
+                    logger.debug('exception in retry: %s', str(ex))
+                    ret = False
+                if ret:
+                    break
+            return ret
+        return _repeat_when_false
+    return _decorator
