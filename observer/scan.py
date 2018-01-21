@@ -23,8 +23,7 @@ def static_hash_map(origin, distri, depth=4):
     :param depth: Top `depth` weight to run.
     """
     file_hash_map = {}
-    all_weight = sorted(distri.keys())
-    all_weight.reverse()
+    all_weight = sorted(distri.keys(), reverse=True)
     if depth:
         enable_weight = all_weight[:depth]
     else:

@@ -20,6 +20,7 @@ def get_random_string(length=32, case_pool=digits+ascii_lowercase):
     """Return random string."""
     return ''.join([random.choice(case_pool) for _ in range(length)])
 
+
 def remove_blank(txt):
     """Remove blank from text."""
     return RE_REMOVE_BLANK.sub("", txt)
