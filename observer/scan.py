@@ -9,31 +9,9 @@ import requests
 from utils.log import LOGGER as logger
 from utils.var import HTTP_HEADERS
 from utils.common import repeat_when_false
+from utils.process import call_multi_process
+
 from . import byte_hash
-
-
-def static_hash_map(origin, distri, depth=4):
-    """
-    return some hash string of files in website.
-
-    :param origin: Such as: http://google.com, must
-        start with scheme, like js url_object.origin.
-    :param distri: Dictionary from plugin.file_distribute.
-        :like: `{1:'filepath'}`.
-    :param depth: Top `depth` weight to run.
-    """
-    file_hash_map = {}
-    all_weight = sorted(distri.keys(), reverse=True)
-    if depth:
-        enable_weight = all_weight[:depth]
-    else:
-        enable_weight = all_weight[:]
-    for path in enable_urls(distri, enable_weight):
-        url = urljoin(origin, path)
-        hashstr = request_file_hash(url)
-        logger.info('%s: %s', path, hashstr)
-        file_hash_map[path] = hashstr
-    return file_hash_map
 
 
 @repeat_when_false(4)
@@ -59,3 +37,27 @@ def enable_urls(distri, keys):
     for key in keys:
         urls.extend(distri.get(key))
     return urls
+
+
+def static_hash_map(origin, distri, depth=4):
+    """
+    return some hash string of files in website.
+
+    :param origin: Such as: http://google.com, must
+        start with scheme, like js url_object.origin.
+    :param distri: Dictionary from plugin.file_distribute.
+        :like: `{1:'filepath'}`.
+    :param depth: Top `depth` weight to run.
+    """
+    all_weight = sorted(distri.keys(), reverse=True)
+    if depth:
+        enable_weight = all_weight[:depth]
+    else:
+        enable_weight = all_weight[:]
+
+    def _gen_url():
+        for path in enable_urls(distri, enable_weight):
+            url = urljoin(origin, path)
+            yield url
+
+    return call_multi_process(request_file_hash, _gen_url())
