@@ -3,7 +3,7 @@
 # by nearg1e (nearg1e.com@gmail[dot]com)
 """ File: observer/scan.py """
 
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 import requests
 
 from utils.log import LOGGER as logger
@@ -11,6 +11,7 @@ from utils.var import HTTP_HEADERS
 from utils.common import repeat_when_false
 from utils.process import call_multi_process
 
+from .version import str2version
 from . import byte_hash
 
 
@@ -60,4 +61,8 @@ def static_hash_map(origin, distri, depth=4):
             url = urljoin(origin, path)
             yield url
 
-    return call_multi_process(request_file_hash, _gen_url())
+    result = call_multi_process(request_file_hash, _gen_url())
+    for url_key, hash_string in result.items():
+        path = urlparse(url_key).path
+        result[path] = result.pop(url_key)
+    return result
