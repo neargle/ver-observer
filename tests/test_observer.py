@@ -218,6 +218,15 @@ def static_hash_map_test():
     logger.info('static_hash_map_test pass!')
 
 
+def make_version_test():
+    logger.warning('make_version_test start!')
+    from test_data import target_tmp_hash_map
+    from observer.version import make_version
+    django = search('django')
+    logger.critical('make_version return: %s', make_version(target_tmp_hash_map, django.get('fingerprint')))
+    logger.info('make_version_test pass!')
+
+
 def main():
     filter_word = ''
     try:
@@ -234,4 +243,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
