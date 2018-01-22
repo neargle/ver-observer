@@ -44,7 +44,7 @@ def call_multi_process(function, args_lst, timeout=float('inf')):
         def _callback(result, args_=args):
             results[args_] = result
 
-        if not isinstance(args, collections.Iterable):
+        if not isinstance(args, (list, tuple, collections.Generator)):
             args = (args, )
         childs.append(process_pool.apply_async(function, args, callback=_callback))
 
