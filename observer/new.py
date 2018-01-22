@@ -91,8 +91,7 @@ class ProjectInfo(object):
         # Some versions like Alpha(1.9a), Beta(1.9b) is out of consider.
         # Only return final version.
         pat = re.compile(r'^[0-9\.]+$')
-        versions = sorted([str2version(ver_) for ver_ in lines if pat.match(ver_)])
-        versions.reverse()
+        versions = sorted([str2version(ver_) for ver_ in lines if pat.match(ver_)], reverse=True)
         return versions
 
 
@@ -169,4 +168,3 @@ class ProjectInfo(object):
         path = os.path.realpath(filename)
         with open(path, 'w') as _fp:
             json.dump(self.info_result, _fp, indent=4, sort_keys=True)
-
