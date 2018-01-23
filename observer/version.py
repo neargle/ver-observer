@@ -36,31 +36,32 @@ def make_operator(real_hash, fingerprint_hash):
                 operator = '!='
             else:
                 operator = '>'
-    else:
-        if fingerprint_hash:
-            operator = '<'
-        else:
-            operator = '<='
-    logger.noise(
-        'real hash: %s, fingerprint: %s. operator is %s',
-        real_hash, fingerprint_hash, operator
-    )
-    return operator
+        return operator
 
 
 def make_version(static_map, fingerprint_map):
     """return version expression."""
-    version_compare_lst = []
+    version_compare_lst = set()
     key_lst = fingerprint_map.keys()
     version_lst = sorted([str2version(ver_) for ver_ in key_lst], reverse=True)
     last = version_lst[0]
     # compare to each version fingerprint.
     # make compare expressions. like [(">=", 'v2.3.3.3')]
-    for version in version_lst:
-        operators = set()
-        fingerprint = fingerprint_map.get(version.vstring)
-        for path, filehash in fingerprint.items():
-            real_hash = static_map.get(path)
-            operators.add(make_operator(real_hash, filehash))
-        logger.debug("version %s: operator %s", version.vstring, operators)
+    for path, real_hash in static_map.items():
+        for version in version_lst[1:]:
+            logger.noise('version: %s, path: %s', version.vstring, path)
+            fingerprint = fingerprint_map.get(version.vstring)
+            fingerprint_hash = fingerprint.get(path)
+            if fingerprint_hash is None:
+                continue
+            if real_hash == fingerprint_hash:
+                operator = ('<=', version.vstring)
+            else:
+                operator = ('!=', version.vstring)
+            version_compare_lst.add(operator)
+            logger.noise(
+                'real hash: %s, fingerprint: %s. operator is %s',
+                real_hash, fingerprint_hash, operator
+            )
+    logger.debug("operator: %s", version_compare_lst)
     return version_compare_lst
