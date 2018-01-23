@@ -27,21 +27,25 @@ def str2version(version):
 
 def make_operator(real_hash, fingerprint_hash):
     """return a set of compare operator. like ('>=')."""
-    operators = set()
+    operator = ""
     if real_hash:
         if real_hash == fingerprint_hash:
-            operators.add('>=')
+            operator = '>='
         else:
             if fingerprint_hash:
-                operators.add('!=')
+                operator = '!='
             else:
-                operators.add('>')
+                operator = '>'
     else:
         if fingerprint_hash:
-            operators.add('<')
+            operator = '<'
         else:
-            operators.add('<=')
-    return operators
+            operator = '<='
+    logger.noise(
+        'real hash: %s, fingerprint: %s. operator is %s',
+        real_hash, fingerprint_hash, operator
+    )
+    return operator
 
 
 def make_version(static_map, fingerprint_map):
@@ -53,8 +57,10 @@ def make_version(static_map, fingerprint_map):
     # compare to each version fingerprint.
     # make compare expressions. like [(">=", 'v2.3.3.3')]
     for version in version_lst:
+        operators = set()
         fingerprint = fingerprint_map.get(version.vstring)
-        for path, filehash in fingerprint:
+        for path, filehash in fingerprint.items():
             real_hash = static_map.get(path)
-            operators = make_operator(real_hash, filehash)
+            operators.add(make_operator(real_hash, filehash))
+        logger.debug("version %s: operator %s", version.vstring, operators)
     return version_compare_lst
