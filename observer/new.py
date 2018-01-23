@@ -38,7 +38,8 @@ class ProjectInfo(object):
         'framework': '',
         'alias': [],
         'versions': [],
-        'fingerprint': {}
+        'fingerprint': {},
+        'reverse_fingerprint': {}
     }
 
     def __init__(self, framework_name, target_project_path, static_path, web_static_root):
@@ -66,12 +67,14 @@ class ProjectInfo(object):
         self.set_versions()
         logger.info('diff the file version by version and get the info of different file.')
         self.forward_diff()
+        self.reverse_diff()
 
 
     def _git_exec(self, *args, decode=True):
         """Done 'git' command."""
         master_program = 'git'
         command_tup = (master_program, *args)
+        logger.debug('runing command: %s', ' '.join(command_tup))
         output = subprocess.check_output(command_tup, cwd=self.target_project_path,
                                          stderr=subprocess.STDOUT)
         return output.decode() if decode else output
@@ -106,6 +109,7 @@ class ProjectInfo(object):
         """Get all static file's hash string."""
         static_file_lst = self.last_static()
         last_ver = str(version_lst[0])
+        logger.verbose('last hash dictionary, key: %s, version: %s', keyname, last_ver)
         _dic_link = self.info_result[keyname][last_ver] = {}
 
         for filepath in static_file_lst:
@@ -130,6 +134,7 @@ class ProjectInfo(object):
         """Comparison between versions one by one"""
         for version, prev_version in zip(version_lst[:-1], version_lst[1:]):
             next_ver, prev = version.vstring, prev_version.vstring
+            logger.verbose('make hash dictionary, key: %s, version: %s-%s', keyname, next_ver, prev)
             output = self._git_exec('diff', '--name-only', next_ver, prev,
                                     '--', self.static_path, decode=True)
             filelst = output.split()
@@ -145,6 +150,7 @@ class ProjectInfo(object):
     def forward_diff(self):
         """Comparison between versions one by one from new to old."""
         version_lst = self.version_lst
+        logger.verbose('forward version list %s', version_lst)
         self.last_hash(version_lst, 'fingerprint')
         self.make_diff(version_lst, 'fingerprint')
 
@@ -154,8 +160,13 @@ class ProjectInfo(object):
         version_lst = self.info_result.get('fingerprint').keys()
         version_lst = sorted([str2version(ver_) for ver_ in version_lst])
         start_version = version_lst[1]
+        logger.verbose('reverse version list %s', version_lst)
+        logger.verbose('git checkout to %s', start_version.vstring)
         self._git_exec('checkout', start_version.vstring, decode=True)
-        
+        self.last_hash(version_lst[1:], 'reverse_fingerprint')
+        self.make_diff(version_lst[1:], 'reverse_fingerprint')
+        logger.verbose('git checkout to HEAD')
+        self._git_exec('checkout', '-', decode=True)
 
 
     def ancestor_file(self, vstring, filepath):
