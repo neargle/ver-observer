@@ -64,10 +64,8 @@ class ProjectInfo(object):
         self.add_alias(framework_name)
         logger.info('set the all versions.')
         self.set_versions()
-        logger.info('get hash string of all static file in last versions.')
-        self.last_hash()
         logger.info('diff the file version by version and get the info of different file.')
-        self.make_diff()
+        self.forward_diff()
 
 
     def _git_exec(self, *args, decode=True):
@@ -104,11 +102,11 @@ class ProjectInfo(object):
         return static_files
 
 
-    def last_hash(self):
+    def last_hash(self, version_lst, keyname):
         """Get all static file's hash string."""
         static_file_lst = self.last_static()
-        last_ver = str(self.version_lst[0])
-        _dic_link = self.info_result['fingerprint'][last_ver] = {}
+        last_ver = str(version_lst[0])
+        _dic_link = self.info_result[keyname][last_ver] = {}
 
         for filepath in static_file_lst:
             md5_string = file_hash(filepath)
@@ -128,20 +126,36 @@ class ProjectInfo(object):
         return urljoin(self.web_static_root, relative_path)
 
 
-    def make_diff(self):
-        """Comparison between versions one by one."""
-        for version, prev_version in zip(self.version_lst, self.version_lst[1:]):
-            new, old = version.vstring, prev_version.vstring
-            output = self._git_exec('diff', '--name-only', new, old,
+    def make_diff(self, version_lst, keyname):
+        """Comparison between versions one by one"""
+        for version, prev_version in zip(version_lst[:-1], version_lst[1:]):
+            next_ver, prev = version.vstring, prev_version.vstring
+            output = self._git_exec('diff', '--name-only', next_ver, prev,
                                     '--', self.static_path, decode=True)
             filelst = output.split()
             if not filelst:
                 continue
-            _dic_link = self.info_result['fingerprint'][old] = {}
+            _dic_link = self.info_result[keyname][prev] = {}
             for filename in filelst:
-                hash_string = self.ancestor_file(old, filename)
+                hash_string = self.ancestor_file(prev, filename)
                 web_file = self.web_file_path(filename)
                 _dic_link[web_file] = hash_string
+
+
+    def forward_diff(self):
+        """Comparison between versions one by one from new to old."""
+        version_lst = self.version_lst
+        self.last_hash(version_lst, 'fingerprint')
+        self.make_diff(version_lst, 'fingerprint')
+
+
+    def reverse_diff(self):
+        """Comparison between versions one by one from old to new."""
+        version_lst = self.info_result.get('fingerprint').keys()
+        version_lst = sorted([str2version(ver_) for ver_ in version_lst])
+        start_version = version_lst[1]
+        self._git_exec('checkout', start_version.vstring, decode=True)
+        
 
 
     def ancestor_file(self, vstring, filepath):

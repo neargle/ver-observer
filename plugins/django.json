@@ -14,7 +14,7 @@
             "/static/admin/js/inlines.js": "17981b4df24a5b509f7b4544d7594ad8",
             "/static/admin/js/inlines.min.js": "8ef8b2379896480103c6dfd275634e93"
         },
-        "1.11.8": {
+        "1.11.9": {
             "/static/admin/css/autocomplete.css": "",
             "/static/admin/css/base.css": "5af66c1b1797cb8f865b443cea0dcc17",
             "/static/admin/css/responsive.css": "",
@@ -406,7 +406,7 @@
             "/static/admin/js/admin/RelatedObjectLookups.js": "b3916e8770e872d88952acfca2afe82f",
             "/static/admin/js/vendor/xregexp/xregexp.js": ""
         },
-        "2.0": {
+        "2.0.1": {
             "/static/admin/css/autocomplete.css": "781713f306644a2be4cf51e8162e4cb2",
             "/static/admin/css/base.css": "17fd9d2dcc19d382930dcaf53a6d5212",
             "/static/admin/css/changelists.css": "f6dc691f8d626f3a0d90b09a734a533e",
@@ -469,10 +469,10 @@
             "/static/admin/js/prepopulate_init.js": "0d3b53c37074e2843b0bdfd36d429be1",
             "/static/admin/js/timeparse.js": "51258861a46a90acf44986e3950779ab",
             "/static/admin/js/urlify.js": "4087f3e18796427f8934984fd1928145",
-            "/static/admin/js/vendor/jquery/LICENSE-JQUERY.txt": "a158210a2737adfeb983ddb23df97f7f",
+            "/static/admin/js/vendor/jquery/LICENSE.txt": "a158210a2737adfeb983ddb23df97f7f",
             "/static/admin/js/vendor/jquery/jquery.js": "09dd64a64ba840c31a812a3ca25eaeee",
             "/static/admin/js/vendor/jquery/jquery.min.js": "c9f5aeeca3ad37bf2aa006139b935f0a",
-            "/static/admin/js/vendor/select2/LICENSE-SELECT2.md": "7cf1de939f3b2d1eebd331c0645f19a2",
+            "/static/admin/js/vendor/select2/LICENSE.md": "7cf1de939f3b2d1eebd331c0645f19a2",
             "/static/admin/js/vendor/select2/i18n/ar.js": "a8bb27ec698c86bde72c8a6f13a8e9b4",
             "/static/admin/js/vendor/select2/i18n/az.js": "498dc667b34eb0fddc31c4e92330d1aa",
             "/static/admin/js/vendor/select2/i18n/bg.js": "89cba4df3c8694fcb33098dd1646cac1",
@@ -522,14 +522,16 @@
             "/static/admin/js/vendor/select2/i18n/zh-TW.js": "c021537edf2c555f149509150ff986e3",
             "/static/admin/js/vendor/select2/select2.full.js": "a95323cb476000ee17d7a252786df963",
             "/static/admin/js/vendor/select2/select2.full.min.js": "da607360bcc65284a197ada3d68d5439",
-            "/static/admin/js/vendor/xregexp/LICENSE-XREGEXP.txt": "d64cecf4f157554252e8a0477aff362a",
+            "/static/admin/js/vendor/xregexp/LICENSE.txt": "d64cecf4f157554252e8a0477aff362a",
             "/static/admin/js/vendor/xregexp/xregexp.js": "1865b1cf508516647c711e85bdc620a7",
             "/static/admin/js/vendor/xregexp/xregexp.min.js": "c95393b8ca4d93ecccea2021b9c5c626"
         }
     },
     "framework": "django",
     "versions": [
+        "2.0.1",
         "2.0",
+        "1.11.9",
         "1.11.8",
         "1.11.7",
         "1.11.6",
