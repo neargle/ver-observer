@@ -62,7 +62,7 @@ def static_hash_map(origin, distri, depth=4):
             yield url
 
     result = call_multi_process(request_file_hash, _gen_url())
-    for url_key in result.keys():
+    for url_key in result:
         path = urlparse(url_key).path
         result[path] = result.pop(url_key)
     return result
