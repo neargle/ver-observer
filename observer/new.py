@@ -153,7 +153,7 @@ class ProjectInfo(object):
             logger.noise('this path is not exists on disk in version %s:%s', vstring, filepath)
             logger.noise('subprocess error message: %s', ex)
             logger.noise('stderr fatal message: %s', ex.output)
-            return
+            return ''
         else:
             return byte_hash(output)
 
