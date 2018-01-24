@@ -12,6 +12,12 @@ from utils.common import IS_PY3
 from utils.log import LOGGER as logger
 
 
+OPERATOR_MAP = {
+    True: "<=",
+    False: ">="
+}
+
+
 def str2version(version):
     """to version"""
     if IS_PY3:
@@ -39,12 +45,11 @@ def make_operator(real_hash, fingerprint_hash):
         return operator
 
 
-def make_version(static_map, fingerprint_map):
+def make_version(static_map, fingerprint_map, reverse=True):
     """return version expression."""
     version_compare_lst = set()
     key_lst = fingerprint_map.keys()
-    version_lst = sorted([str2version(ver_) for ver_ in key_lst], reverse=True)
-    last = version_lst[0]
+    version_lst = sorted([str2version(ver_) for ver_ in key_lst], reverse=reverse)
     # compare to each version fingerprint.
     # make compare expressions. like [(">=", 'v2.3.3.3')]
     for path, real_hash in static_map.items():
@@ -55,11 +60,11 @@ def make_version(static_map, fingerprint_map):
             if fingerprint_hash is None:
                 continue
             if real_hash == fingerprint_hash:
-                operator = ('<=', version.vstring)
+                operator = (OPERATOR_MAP.get(reverse), version.vstring)
             else:
                 operator = ('!=', version.vstring)
             version_compare_lst.add(operator)
-            logger.noise(
+            logger.debug(
                 'real hash: %s, fingerprint: %s. operator is %s',
                 real_hash, fingerprint_hash, operator
             )
