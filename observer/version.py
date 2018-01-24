@@ -33,14 +33,17 @@ def str2version(version):
 
 def match(static_map, fingerprint):
     """return if fingerprint match or not."""
-    all_match_result = [
-        static_map.get(path) == filehash \
-        for path, filehash in fingerprint.items() \
-        if filehash
-    ]
-    logger.debug('match result list: %s', all_match_result)
-    return all(all_match_result)
+    def _gen_match():
+        for path, filehash in fingerprint.items():
+            # /static/admin/js/vendor/jquery/LICENSE.txt
+            real_hash = static_map.get(path)
+            if filehash and real_hash:
+                if gloal_yes and not real_hash == filehash:
+                    import ipdb; ipdb.set_trace()
+                yield real_hash == filehash
+    return all(_gen_match())
 
+gloal_yes = False
 
 def make_version(static_map, fingerprint_map, reverse=True):
     """
@@ -61,11 +64,13 @@ def make_version(static_map, fingerprint_map, reverse=True):
         version_compare_set.add(('>=', head_version_str))
 
     for version in version_lst[1:]:
-        if '1.10.8' == version.vstring:
-            import ipdb; ipdb.set_trace()
+        if '1.11.9' == version.vstring and reverse:
+            global gloal_yes
+            gloal_yes = True
         logger.verbose('create operator in version: %s', version.vstring)
         fingerprint.update(fingerprint_map.get(version.vstring))
         if match(static_map, fingerprint):
+            gloal_yes = False
             operator = OPERATOR_MAP.get(reverse)
             version_compare_set.add((operator, version.vstring))
             logger.debug(

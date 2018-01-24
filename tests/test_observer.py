@@ -213,17 +213,26 @@ def static_hash_map_test():
     django = search('django')
     distri = file_distribute(django)
     logger.info('file_distribute end.')
-    map_ = static_hash_map(target_website, distri, depth=4)
+    target_website = 'http://127.0.0.1:8000/'
+    map_ = static_hash_map(target_website, distri, depth=0)
     logger.info(json.dumps(map_, indent=4, sort_keys=True))
     logger.info('static_hash_map_test pass!')
 
 
 def make_version_test():
     logger.warning('make_version_test start!')
-    from test_data import target_tmp_hash_map
+    import ext.err_hunter as err_hunter
+    from test_data import target_tmp_hash_map_all as target_tmp_hash_map
     from observer.version import make_version
     django = search('django')
-    logger.critical('make_version return: %s', make_version(target_tmp_hash_map, django.get('fingerprint')))
+    logger.critical(
+        'make_version return: %s',
+        make_version(target_tmp_hash_map, django.get('fingerprint'))
+    )
+    logger.critical(
+        'make_version return: %s',
+        make_version(target_tmp_hash_map, django.get('reverse_fingerprint'), False)
+    )
     logger.info('make_version_test pass!')
 
 
