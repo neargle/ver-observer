@@ -11,7 +11,7 @@ from utils.common import remove_blank
 from utils.common import IS_PY3
 from utils.log import LOGGER as logger
 
-
+# reverse: operator
 OPERATOR_MAP = {
     True: "<=",
     False: ">="
@@ -31,42 +31,46 @@ def str2version(version):
     return version
 
 
-def make_operator(real_hash, fingerprint_hash):
-    """return a set of compare operator. like ('>=')."""
-    operator = ""
-    if real_hash:
-        if real_hash == fingerprint_hash:
-            operator = '>='
-        else:
-            if fingerprint_hash:
-                operator = '!='
-            else:
-                operator = '>'
-        return operator
+def match(static_map, fingerprint):
+    """return if fingerprint match or not."""
+    all_match_result = [
+        static_map.get(path) == filehash \
+        for path, filehash in fingerprint.items() \
+        if filehash
+    ]
+    logger.debug('match result list: %s', all_match_result)
+    return all(all_match_result)
 
 
 def make_version(static_map, fingerprint_map, reverse=True):
-    """return version expression."""
-    version_compare_lst = set()
+    """
+    return version expression. compare to each version fingerprint.
+    make compare expressions. like [(">=", 'v2.3.3.3')]
+    """
+    version_compare_set = set()
     key_lst = fingerprint_map.keys()
     version_lst = sorted([str2version(ver_) for ver_ in key_lst], reverse=reverse)
-    # compare to each version fingerprint.
-    # make compare expressions. like [(">=", 'v2.3.3.3')]
-    for path, real_hash in static_map.items():
-        for version in version_lst[1:]:
-            logger.noise('version: %s, path: %s', version.vstring, path)
-            fingerprint = fingerprint_map.get(version.vstring)
-            fingerprint_hash = fingerprint.get(path)
-            if fingerprint_hash is None:
-                continue
-            if real_hash == fingerprint_hash:
-                operator = (OPERATOR_MAP.get(reverse), version.vstring)
-            else:
-                operator = ('!=', version.vstring)
-            version_compare_lst.add(operator)
+
+    # head version in reverse version list is different
+    head_version_str = version_lst[0].vstring
+    fingerprint = head_fingerprint = fingerprint_map.get(head_version_str)
+    match_head = match(static_map, head_fingerprint)
+    if match_head and reverse:
+        version_compare_set.add(('>', version_lst[1].vstring))
+    elif match_head and not reverse:
+        version_compare_set.add(('>=', head_version_str))
+
+    for version in version_lst[1:]:
+        if '1.10.8' == version.vstring:
+            import ipdb; ipdb.set_trace()
+        logger.verbose('create operator in version: %s', version.vstring)
+        fingerprint.update(fingerprint_map.get(version.vstring))
+        if match(static_map, fingerprint):
+            operator = OPERATOR_MAP.get(reverse)
+            version_compare_set.add((operator, version.vstring))
             logger.debug(
-                'real hash: %s, fingerprint: %s. operator is %s',
-                real_hash, fingerprint_hash, operator
+                'create version opreator %s %s',
+                operator, version.vstring
             )
-    logger.debug("operator: %s", version_compare_lst)
-    return version_compare_lst
+    logger.debug("operator: %s", version_compare_set)
+    return version_compare_set
