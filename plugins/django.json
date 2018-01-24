@@ -529,7 +529,7 @@
     },
     "framework": "django",
     "reverse_fingerprint": {
-        "1.10.8": {
+        "1.10": {
             "/static/admin/css/base.css": "ba3dc2f88fc5eea98eb4dbfd43387476",
             "/static/admin/css/changelists.css": "b1b060f73d3725f2d8854a59578aa27a",
             "/static/admin/js/SelectBox.js": "b49f008d186b3f2db292b7122e685c34",
@@ -550,7 +550,7 @@
             "/static/admin/js/vendor/jquery/jquery.js": "aacc43d6f308fa362ac85e3f4fb2b30c",
             "/static/admin/js/vendor/jquery/jquery.min.js": "33cabfa15c1060aaa3d207c653afb1ee"
         },
-        "1.11.9": {
+        "1.11": {
             "/static/admin/css/base.css": "5af66c1b1797cb8f865b443cea0dcc17",
             "/static/admin/css/changelists.css": "f6dc691f8d626f3a0d90b09a734a533e",
             "/static/admin/css/dashboard.css": "7ac78187c567fa5f3c499d246e138bbf",
@@ -635,10 +635,10 @@
             "/static/admin/js/timeparse.js": "a298a7ede5c334038c8c46d9b0a1b008",
             "/static/admin/js/urlify.js": "11f885692a3b65de7f75581e1c2a5a1c"
         },
-        "1.4.22": {
+        "1.4.1": {
             "/static/admin/css/widgets.css": "0bda5702e32b9b1ad4131c2d059a4346"
         },
-        "1.5.12": {
+        "1.5": {
             "/static/admin/css/base.css": "afb3d4c40046335a7b37a738301010d6",
             "/static/admin/css/forms.css": "b7cbdd4cdc2f8cc9e944986548656d8b",
             "/static/admin/css/rtl.css": "0dd5f89c8f8a4c3b1db534aa2d018dd4",
@@ -652,7 +652,7 @@
             "/static/admin/js/inlines.min.js": "e3b5305da6b2bbe98ff93ea364634892",
             "/static/admin/js/prepopulate.min.js": "fb8d07765d1bfff5cf09e82ffe78cadf"
         },
-        "1.6.11": {
+        "1.6": {
             "/static/admin/css/base.css": "c8269a10a4bc30bb87cbdac24f551e44",
             "/static/admin/css/changelists.css": "facd9faec460388a3a53d57f1a647214",
             "/static/admin/css/dashboard.css": "4898e2e9983d712c1860982490b89f1f",
@@ -675,7 +675,7 @@
             "/static/admin/js/jquery.js": "08c235d357750c657ac1db7d1cf656a9",
             "/static/admin/js/jquery.min.js": "397754ba49e9e0cf4e7c190da78dda05"
         },
-        "1.7.1": {
+        "1.7": {
             "/static/admin/css/base.css": "c52f7bea4f70a7b827442810c0065f86",
             "/static/admin/css/forms.css": "507c31d51476acf4578c6fd85b9e72d9",
             "/static/admin/css/widgets.css": "fd521eb98ffd9aa445172f9c515f59fb",
@@ -716,7 +716,7 @@
             "/static/admin/js/prepopulate.min.js": "4479f53b704fe92ebca92fd20ee53cab",
             "/static/admin/js/urlify.js": "687bc28c85b71ca3a22e350a800b0b84"
         },
-        "1.7.11": {
+        "1.7.2": {
             "/static/admin/js/SelectFilter2.js": "2f2bc9e0964bda405331bfdbdcb8866b"
         },
         "1.8": {
@@ -736,19 +736,19 @@
         "1.8.1": {
             "/static/admin/css/widgets.css": "b9ec9b826b20c6164005953c4e6efed6"
         },
-        "1.8.11": {
-            "/static/admin/js/admin/DateTimeShortcuts.js": "1368280f407574c09376054673172809",
-            "/static/admin/js/core.js": "8800d3d6dbd23f48998536a48a715313"
-        },
-        "1.8.13": {
+        "1.8.12": {
             "/static/admin/js/admin/RelatedObjectLookups.js": "b0bbaabc66ddf08f18c4fe0dd42e4868"
         },
-        "1.8.18": {
+        "1.8.14": {
             "/static/admin/js/admin/RelatedObjectLookups.js": "f4612c3a03fcc5e0a05c70d453c4926f"
         },
-        "1.8.8": {
+        "1.8.2": {
             "/static/admin/css/forms.css": "4d10ed9b5ee50f9aef9c1e276347edf1",
             "/static/admin/css/widgets.css": "2753875e2781db9c06c54c89acf4b91a"
+        },
+        "1.8.9": {
+            "/static/admin/js/admin/DateTimeShortcuts.js": "1368280f407574c09376054673172809",
+            "/static/admin/js/core.js": "8800d3d6dbd23f48998536a48a715313"
         },
         "1.9": {
             "/static/admin/css/base.css": "9f6547179acea8dbbeda17487ea1e247",
@@ -847,21 +847,21 @@
             "/static/admin/js/admin/DateTimeShortcuts.js": "31b8608fbf2988d5adaf56b24a33381a",
             "/static/admin/js/admin/RelatedObjectLookups.js": "b09945d2d972693fec6551420801db62"
         },
-        "1.9.13": {
-            "/static/admin/js/admin/RelatedObjectLookups.js": "6a0c7c21123440bb964fdc5c140a3a3d",
-            "/static/admin/js/vendor/xregexp/xregexp.js": "1865b1cf508516647c711e85bdc620a7"
-        },
-        "1.9.4": {
+        "1.9.2": {
             "/static/admin/js/admin/DateTimeShortcuts.js": "1a1d41ec13f8f4118294b9f7d826f4e0",
             "/static/admin/js/core.js": "84da04fcbfaf7b6f2962cc21bc84aa9b"
         },
         "1.9.5": {
             "/static/admin/js/admin/RelatedObjectLookups.js": "b3916e8770e872d88952acfca2afe82f"
         },
-        "1.9.7": {
+        "1.9.6": {
             "/static/admin/fonts/LICENSE.txt": "d273d63619c9aeaf15cdaf76422c4f87"
         },
-        "2.0.1": {
+        "1.9.8": {
+            "/static/admin/js/admin/RelatedObjectLookups.js": "6a0c7c21123440bb964fdc5c140a3a3d",
+            "/static/admin/js/vendor/xregexp/xregexp.js": "1865b1cf508516647c711e85bdc620a7"
+        },
+        "2.0": {
             "/static/admin/css/autocomplete.css": "781713f306644a2be4cf51e8162e4cb2",
             "/static/admin/css/base.css": "17fd9d2dcc19d382930dcaf53a6d5212",
             "/static/admin/css/responsive.css": "25d98d3909ed22d0b0cc88475a7c842b",

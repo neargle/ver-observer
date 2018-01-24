@@ -157,9 +157,16 @@ class ProjectInfo(object):
 
     def reverse_diff(self):
         """Comparison between versions one by one from old to new."""
-        version_lst = self.info_result.get('fingerprint').keys()
-        version_lst = sorted([str2version(ver_) for ver_ in version_lst])
+        # version_lst in here must start from min version in fingerprint 
+        fingerprint_versions = self.info_result.get('fingerprint').keys()
+        min_version = min(sorted((str2version(vstr) for vstr in fingerprint_versions)))
+        version_lst = self.version_lst
+        version_lst.reverse()
+        version_lst = version_lst[version_lst.index(min_version.vstring):]
+        version_lst = [str2version(ver_) for ver_ in version_lst]
+
         start_version = version_lst[1]
+        logger.verbose('the first version with static file is %s', start_version.vstring)
         logger.verbose('reverse version list %s', version_lst)
         logger.verbose('git checkout to %s', start_version.vstring)
         self._git_exec('checkout', start_version.vstring, decode=True)
