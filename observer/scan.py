@@ -40,7 +40,7 @@ def enable_urls(distri, keys):
     return urls
 
 
-def static_hash_map(origin, distri, depth=4):
+def static_hash_map(origin, distri, depth=0):
     """
     return some hash string of files in website.
 
