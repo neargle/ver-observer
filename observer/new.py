@@ -150,30 +150,32 @@ class ProjectInfo(object):
     def forward_diff(self):
         """Comparison between versions one by one from new to old."""
         version_lst = self.version_lst
+        self._git_exec('checkout', self.version_lst[0].vstring)
         logger.verbose('forward version list %s', version_lst)
         self.last_hash(version_lst, 'fingerprint')
         self.make_diff(version_lst, 'fingerprint')
+        self._git_exec('checkout', '-')
 
 
     def reverse_diff(self):
         """Comparison between versions one by one from old to new."""
-        # version_lst in here must start from min version in fingerprint 
+        # version_lst in here must start from min version in fingerprint
         fingerprint_versions = self.info_result.get('fingerprint').keys()
         min_version = min(sorted((str2version(vstr) for vstr in fingerprint_versions)))
         version_lst = self.version_lst
         version_lst.reverse()
-        version_lst = version_lst[version_lst.index(min_version.vstring):]
-        version_lst = [str2version(ver_) for ver_ in version_lst]
+        logger.warning(version_lst)
+        version_lst = version_lst[version_lst.index(min_version):]
 
         start_version = version_lst[1]
         logger.verbose('the first version with static file is %s', start_version.vstring)
         logger.verbose('reverse version list %s', version_lst)
         logger.verbose('git checkout to %s', start_version.vstring)
-        self._git_exec('checkout', start_version.vstring, decode=True)
+        self._git_exec('checkout', start_version.vstring)
         self.last_hash(version_lst[1:], 'reverse_fingerprint')
         self.make_diff(version_lst[1:], 'reverse_fingerprint')
         logger.verbose('git checkout to HEAD')
-        self._git_exec('checkout', '-', decode=True)
+        self._git_exec('checkout', '-')
 
 
     def ancestor_file(self, vstring, filepath):
