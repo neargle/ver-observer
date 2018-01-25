@@ -61,13 +61,13 @@ def make_version(static_map, fingerprint_map, reverse=True):
         version_compare_set.add(('>=', head_version_str))
 
     for version in version_lst[1:]:
-        logger.verbose('create operator in version: %s', version.vstring)
+        logger.debug('create operator in version: %s', version.vstring)
         fingerprint.update(fingerprint_map.get(version.vstring))
         if match(static_map, fingerprint):
             operator = OPERATOR_MAP.get(reverse)
             version_compare_set.add((operator, version.vstring))
-            logger.debug(
-                'create version opreator %s %s',
+            logger.verbose(
+                'create version opreator: %s %s',
                 operator, version.vstring
             )
     logger.debug("operator: %s", version_compare_set)
