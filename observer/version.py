@@ -1,15 +1,21 @@
 #!/usr/bin/env python3
 # coding=utf-8
 # by nearg1e (nearg1e.com@gmail[dot]com)
-"""about version.
-thx. aploium
+"""
+about version.
+
 """
 
-from distutils.version import LooseVersion
-from utils.common import remove_blank
+import sys
 
+from distutils.version import LooseVersion
+
+from utils.common import remove_blank
 from utils.common import IS_PY3
 from utils.log import LOGGER as logger
+from ext.terminaltables import AsciiTable
+
+from .calls import show_output
 
 # reverse: operator
 OPERATOR_MAP = {
@@ -84,3 +90,52 @@ def make_all(static_map, fingerprint):
         make_version(static_map, fingerprint.get('reverse_fingerprint'), False)
     )
     return version_compare_set
+
+
+def calc(version_compare_set):
+    """calcute version compare list."""
+    def _get_version(version_compare):
+        return str2version(version_compare[1])
+
+    def _check(version_compare_lst):
+        compare_lst = ['>']
+        # avoid [>= 1.1, <= 1.0]
+        for compare, _ in version_compare_lst:
+            compare = compare.strip('=')
+            if compare != compare_lst[-1]:
+                compare_lst.append(compare)
+
+        length = len(compare_lst)
+        if 0 < length < 3:
+            return True
+        logger.warning('maybe framework or cms had be change by developer')
+        if len(version_compare_lst) < 1:
+            logger.warning('Reducing depth(--depth), set smaller number maybe useful')
+            logger.error('unable to judge version')
+            sys.exit()
+        elif length > 2:
+            print(compare_lst)
+            logger.warning('Enlarge depth(--depth), set larger number or max(0) maybe useful')
+            lst = [('version cond',)]
+            for comb, ver in version_compare_lst:
+                lst.append(('{} {}'.format(comb, ver),))
+            show_output(AsciiTable(lst).table)
+            sys.exit()
+
+    lst = list(version_compare_set)
+    lst = sorted(lst, key=_get_version)
+    if _check(lst):
+        if len(lst) == 1:
+            show_output(''.join(lst[0]))
+            return lst
+        for prev_, next_ in zip(lst[:-1], lst[1:]):
+            if prev_[0].strip('=') == '>' \
+                and next_[0].strip('=') == '<':
+                lst = [
+                    ('version cond',),
+                    ('{} {}'.format(*prev_),),
+                    ('{} {}'.format(*next_),)
+                ]
+                show_output(AsciiTable(lst).table)
+                return [prev_, next_]
+    return []

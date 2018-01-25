@@ -13,8 +13,8 @@ from utils.common import (
 )
 
 from .plugin import search, file_distribute
+from .version import make_all, calc
 from .options import call_parser
-from .version import make_all
 from .scan import static_hash_map
 from .vars import APPNAME
 
@@ -38,7 +38,7 @@ def run():
     logger.verbose('show the hash map: %s', json.dumps(hash_map, indent=4, sort_keys=True))
     logger.info('let\'s observer which version of %s.', depend)
     version_set = make_all(hash_map, plugin_info)
-    
+    calc(version_set)
 
 
 def check_run_options(args):
