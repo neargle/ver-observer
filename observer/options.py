@@ -47,6 +47,6 @@ def make_parser():
         required=False,
         default=0,
         type=int,
-        help='the greater the depth, the more URL will be scan, default 0 is the largest'
+        help='the greater the depth, the more URL will be scan, default 0 is the maximum'
     )
     return parser
