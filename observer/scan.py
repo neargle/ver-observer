@@ -18,7 +18,7 @@ from . import byte_hash
 @repeat_when_false(4)
 def request_file_hash(url):
     """Return hash string of file by request url."""
-    logger.debug('request get url: %s', url)
+    logger.verbose('request get url: %s', url)
     try:
         response = requests.get(url, verify=False,
                                 allow_redirects=True, timeout=10, headers=HTTP_HEADERS)

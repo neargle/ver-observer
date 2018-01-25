@@ -7,6 +7,7 @@ import sys
 import json
 
 from ext.version_ext import VersionCond
+from ext.terminaltables import AsciiTable
 from utils.log import LOGGER as logger
 from utils.common import (
     file_md5 as file_hash,
@@ -18,6 +19,7 @@ from .version import make_all, calc
 from .options import call_parser
 from .scan import static_hash_map
 from .vars import APPNAME
+from .calls import show_output
 
 
 def run():
@@ -41,9 +43,13 @@ def run():
     version_set = make_all(hash_map, plugin_info)
     cond_lst = [VersionCond.from_str(''.join(comp)) for comp in calc(version_set)]
     logger.info('show the possible versions of %s on %s', depend, args.url)
+    result_lst = [('possible version',)]
     for version_str in plugin_info.get('versions'):
         if all((cond.match(version_str) for cond in cond_lst)):
-            logger.info('%s v%s', depend, version_str)
+            info = '{} v{}'.format(depend, version_str)
+            logger.verbose(info)
+            result_lst.append((info,))
+    show_output(AsciiTable(result_lst).table)
     sys.exit(0)
 
 
