@@ -6,6 +6,7 @@
 import sys
 import json
 
+from ext.version_ext import VersionCond
 from utils.log import LOGGER as logger
 from utils.common import (
     file_md5 as file_hash,
@@ -38,7 +39,12 @@ def run():
     logger.verbose('show the hash map: %s', json.dumps(hash_map, indent=4, sort_keys=True))
     logger.info('let\'s observer which version of %s.', depend)
     version_set = make_all(hash_map, plugin_info)
-    calc(version_set)
+    cond_lst = [VersionCond.from_str(''.join(comp)) for comp in calc(version_set)]
+    logger.info('show the possible versions of %s on %s', depend, args.url)
+    for version_str in plugin_info.get('versions'):
+        if all((cond.match(version_str) for cond in cond_lst)):
+            logger.info('%s v%s', depend, version_str)
+    sys.exit(0)
 
 
 def check_run_options(args):

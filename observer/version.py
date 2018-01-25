@@ -114,7 +114,6 @@ def calc(version_compare_set):
             logger.error('unable to judge version')
             sys.exit()
         elif length > 2:
-            print(compare_lst)
             logger.warning('Enlarge depth(--depth), set larger number or max(0) maybe useful')
             lst = [('version cond',)]
             for comb, ver in version_compare_lst:
