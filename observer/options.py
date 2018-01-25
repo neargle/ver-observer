@@ -6,6 +6,8 @@
 import sys
 import argparse
 
+from .calls import show_all
+
 
 def call_parser():
     """call the args parser."""
@@ -17,6 +19,12 @@ def call_parser():
         parser.exit()
 
     args = parser.parse_args()
+
+    # option: -a/-all
+    if args.all:
+        show_all()
+        parser.exit()
+
     return args
 
 
@@ -33,13 +41,11 @@ def make_parser():
     parser.add_argument(
         '-u',
         '--url',
-        required=True,
         help='target website url. like http://blog.neargle.com'
     )
     parser.add_argument(
         '-d',
         '--depend',
-        required=True,
         help='the develop depend, web framework or cms name. like "django"'
     )
     parser.add_argument(
@@ -48,5 +54,11 @@ def make_parser():
         default=0,
         type=int,
         help='the greater the depth, the more URL will be scan, default 0 is the maximum'
+    )
+    parser.add_argument(
+        '-a',
+        '--all',
+        action='store_true',
+        help='show all plugin introduction'
     )
     return parser
