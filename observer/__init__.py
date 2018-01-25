@@ -20,8 +20,9 @@ from .vars import APPNAME
 
 
 def run():
-    """main function"""
+    """main function."""
     args = call_parser()
+    check_run_options(args)
     depend = args.depend
     logger.info('searching %s fingerprint infomation.....', depend)
     plugin_info = search(depend)
@@ -38,3 +39,10 @@ def run():
     logger.info('let\'s observer which version of %s.', depend)
     version_set = make_all(hash_map, plugin_info)
     
+
+
+def check_run_options(args):
+    """url(-u/--url) and frameworks name(-d/--depend) is required."""
+    if not args.url or not args.depend:
+        logger.error("url(-u/--url) and frameworks name(-d/--depend) is required")
+        sys.exit()
