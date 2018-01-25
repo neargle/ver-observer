@@ -11,7 +11,6 @@ from utils.var import HTTP_HEADERS
 from utils.common import repeat_when_false
 from utils.process import call_multi_process
 
-from .version import str2version
 from . import byte_hash
 
 
