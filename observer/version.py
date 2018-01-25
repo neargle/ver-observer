@@ -72,3 +72,15 @@ def make_version(static_map, fingerprint_map, reverse=True):
             )
     logger.debug("operator: %s", version_compare_set)
     return version_compare_set
+
+
+def make_all(static_map, fingerprint):
+    """call the make_version"""
+    version_compare_set = set()
+    version_compare_set.update(
+        make_version(static_map, fingerprint.get('fingerprint'))
+    )
+    version_compare_set.update(
+        make_version(static_map, fingerprint.get('reverse_fingerprint'), False)
+    )
+    return version_compare_set
