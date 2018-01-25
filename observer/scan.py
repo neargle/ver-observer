@@ -25,7 +25,7 @@ def request_file_hash(url):
         if response.status_code != 200:
             raise requests.RequestException('Status code error: {}'.format(response.status_code))
     except requests.RequestException as ex:
-        logger.warning('request %s, exception: %s', url, str(ex))
+        logger.trace('request %s, exception: %s', url, str(ex))
         return ''
     else:
         cont = response.content
