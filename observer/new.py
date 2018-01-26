@@ -92,8 +92,11 @@ class ProjectInfo(object):
         lines = cmd_result.split('\n')
         # Some versions like Alpha(1.9a), Beta(1.9b) is out of consider.
         # Only return final version.
-        pat = re.compile(r'^[0-9\.]+$')
-        versions = sorted([str2version(ver_) for ver_ in lines if pat.match(ver_)], reverse=True)
+        pat = re.compile(r'^v?[0-9\.]+$')
+        versions = sorted(
+            [str2version(ver_.lstrip('v')) for ver_ in lines if pat.match(ver_)],
+            reverse=True
+        )
         return versions
 
 
