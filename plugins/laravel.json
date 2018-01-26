@@ -1,7 +1,7 @@
 {
     "alias": [
-        "laravel",
-        "laravel-php"
+        "laravel-php",
+        "laravel"
     ],
     "disable_suffix": [
         "php"

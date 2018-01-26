@@ -232,7 +232,7 @@ class ProjectInfo(object):
 
     def _is_disable_suffix(self, filepath):
         disable_suffix = self.info_result.get('disable_suffix')
-        matchs = (path.endswith(s_) for s_ in disable_suffix)
+        matchs = (filepath.endswith(s_) for s_ in disable_suffix)
         if any(matchs):
             return True
         return False
