@@ -38,6 +38,7 @@ class ProjectInfo(object):
         'framework': '',
         'alias': [],
         'versions': [],
+        'disable_suffix': [],
         'fingerprint': {},
         'reverse_fingerprint': {}
     }
@@ -195,6 +196,11 @@ class ProjectInfo(object):
     def add_alias(self, *alias):
         """Add alias to info_result['alias']."""
         self.info_result['alias'].extend(alias)
+
+
+    def add_filter_suffix(self, *suffixs):
+        """add suffix like 'php', file with suffix will not recond."""
+        self.info_result['disable_suffix'].extend(suffixs)
 
 
     def dump_result(self, filename):
