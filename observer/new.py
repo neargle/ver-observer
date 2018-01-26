@@ -203,8 +203,27 @@ class ProjectInfo(object):
         self.info_result['disable_suffix'].extend(suffixs)
 
 
+    def _disable_suffix_file(self):
+        disable_suffix = self.info_result.get('disable_suffix')
+        def _remove(fingerprint):
+            for _, verinfo in fingerprint.items():
+                for path in verinfo:
+                    # disable endswith suffixs
+                    matchs = (
+                        path.endswith(s_) \
+                        for s_ in disable_suffix
+                    )
+                    if any(matchs):
+                        del verinfo[path]
+
+        for keyname in ['fingerprint', 'reverse_fingerprint']:
+            fingerprint = self.info_result.get(keyname)
+            _remove(fingerprint)
+
+
     def dump_result(self, filename):
         """Dump info_result to file."""
         path = os.path.realpath(filename)
+        self._disable_suffix_file()
         with open(path, 'w') as _fp:
             json.dump(self.info_result, _fp, indent=4, sort_keys=True)

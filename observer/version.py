@@ -37,13 +37,10 @@ def str2version(version):
     return version
 
 
-def match(static_map, fingerprint, suffixs=[]):
+def match(static_map, fingerprint):
     """return if fingerprint match or not."""
     def _gen_match():
         for path, filehash in fingerprint.items():
-            # disable endswith suffixs
-            if any((path.endswith(s) for s in suffixs)):
-                continue
             real_hash = static_map.get(path)
             # LICENSE or file change will make real_hash different
             if filehash and real_hash:
