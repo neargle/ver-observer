@@ -31,7 +31,7 @@ def run():
     plugin_info = search(depend)
     if not plugin_info:
         logger.error('%s can not find a fingerprint of %s', APPNAME, depend)
-        # logger.info('your can use --all to print all fingerprint supported.')
+        logger.info('your can use --all to print all fingerprint supported.')
         # TODO: show the request fingerprint url in github
         sys.exit()
     logger.info('already found %s fingerprint.', depend)
