@@ -1,0 +1,348 @@
+{
+    "alias": [
+        "laravel",
+        "laravel-php"
+    ],
+    "disable_suffix": [
+        "php"
+    ],
+    "fingerprint": {
+        "v3.0.0": {},
+        "v3.0.1": {},
+        "v3.0.2": {},
+        "v3.0.3": {},
+        "v3.0.4": {},
+        "v3.1.0": {},
+        "v3.1.1": {},
+        "v3.1.2": {},
+        "v3.1.3": {},
+        "v3.1.4": {},
+        "v3.1.5": {},
+        "v3.1.6": {},
+        "v3.1.7": {},
+        "v3.1.8": {},
+        "v3.1.9": {
+            "/favicon.ico": "",
+            "/laravel/css/style.css": "",
+            "/laravel/img/logoback.png": "",
+            "/laravel/js/modernizr-2.5.3.min.js": "",
+            "/laravel/js/prettify.js": "",
+            "/laravel/js/scroll.js": ""
+        },
+        "v3.2.0": {
+            "/.htaccess": "e0485a208967ce084c439b796b420eda",
+            "/laravel/css/style.css": "f03ef4849bc6e724701475b36ca4cde1"
+        },
+        "v3.2.1": {},
+        "v3.2.10": {
+            "/laravel/css/style.css": "2c77b0dec20ab616d1c213e2fc18281f"
+        },
+        "v3.2.11": {},
+        "v3.2.12": {},
+        "v3.2.14": {
+            "/.htaccess": "341e16f9a331aefb420551aa0e4c723e",
+            "/bundles/.gitignore": "d41d8cd98f00b204e9800998ecf8427e",
+            "/css/.gitignore": "d41d8cd98f00b204e9800998ecf8427e",
+            "/img/.gitignore": "d41d8cd98f00b204e9800998ecf8427e",
+            "/js/.gitignore": "d41d8cd98f00b204e9800998ecf8427e",
+            "/laravel/css/style.css": "3e7890ce1d17033409efa1df4d1e2315",
+            "/laravel/img/logoback.png": "6e5236ec6dd2cfa7bf732d309c661415",
+            "/laravel/js/modernizr-2.5.3.min.js": "5f7134b6937b1e0d30a68d74191970a4",
+            "/laravel/js/prettify.js": "e323de46c4065d11c92e8132fad3393b",
+            "/laravel/js/scroll.js": "bbc31ab24c41a74359ddf89addb446cc",
+            "/robots.txt": ""
+        },
+        "v3.2.3": {},
+        "v3.2.4": {},
+        "v3.2.5": {},
+        "v3.2.6": {},
+        "v3.2.7": {},
+        "v3.2.8": {},
+        "v3.2.9": {},
+        "v4.0.0": {},
+        "v4.0.5": {
+            "/.htaccess": "b9820d58c8a00aad106062f175c28de4"
+        },
+        "v4.0.9": {
+            "/.htaccess": "e84d5c2f68acc87399ccb75a85489d23"
+        },
+        "v4.1.0": {
+            "/.htaccess": "2fcb2cecbf897887d1b8eccaca289524"
+        },
+        "v4.1.18": {
+            "/robots.txt": "d3b8d8cde26b65f660ff8f8b0879ee94"
+        },
+        "v4.2.11": {
+            "/css/app.css": "",
+            "/packages/.gitkeep": "d41d8cd98f00b204e9800998ecf8427e"
+        },
+        "v5.0.1": {
+            "/fonts/glyphicons-halflings-regular.eot": "",
+            "/fonts/glyphicons-halflings-regular.svg": "",
+            "/fonts/glyphicons-halflings-regular.ttf": "",
+            "/fonts/glyphicons-halflings-regular.woff": "",
+            "/fonts/glyphicons-halflings-regular.woff2": ""
+        },
+        "v5.0.22": {
+            "/css/app.css": "e59a27f7d83cb7f617125ebd7d34ceb0",
+            "/fonts/glyphicons-halflings-regular.eot": "f4769f9bdb7466be65088239c12046d1",
+            "/fonts/glyphicons-halflings-regular.svg": "89889688147bd7575d6327160d64e760",
+            "/fonts/glyphicons-halflings-regular.ttf": "e18bbf611f2a2e43afc071aa2f4e1512",
+            "/fonts/glyphicons-halflings-regular.woff": "fa2772327f55d8198301fdb8bcfc8158",
+            "/fonts/glyphicons-halflings-regular.woff2": "448c34a56d699c29117adc64c43affeb"
+        },
+        "v5.1.11": {
+            "/web.config": ""
+        },
+        "v5.1.3": {
+            "/.htaccess": "ca57a3a7cc91df631bd8a35aa14c87d3"
+        },
+        "v5.2.0": {
+            "/.htaccess": "cd898c9fbef41c635cee1a5ad20e0699",
+            "/web.config": "96201a0f56eea4854606addb599b2104"
+        },
+        "v5.2.31": {
+            "/css/app.css": "",
+            "/js/app.js": "",
+            "/web.config": "50e9a0f34b264670691691d406428d75"
+        },
+        "v5.3.0": {
+            "/web.config": ""
+        },
+        "v5.3.30": {
+            "/css/app.css": "f106d7a5140a00919421b58c54ad3f67",
+            "/js/app.js": "d190c036aac5ce41db653e6b6979fef8"
+        },
+        "v5.4.15": {},
+        "v5.4.21": {
+            "/css/app.css": "bbf0f18ae1bfb0c5a7d38b7b9c6ab960",
+            "/js/app.js": "b2da3c53b3c82ae89e91ae322fcc1202"
+        },
+        "v5.4.30": {
+            "/.htaccess": "cbc8446d5fa1ae11b44fdd90975ca82e"
+        },
+        "v5.5.0": {
+            "/.htaccess": "25ddd864bbdb8e824ffffd621b84a678",
+            "/css/app.css": "dae5430b7e71930b33a671e6b925a4f4",
+            "/js/app.js": "20eb22d13b4f96dd7836c10645cd1ec5"
+        },
+        "v5.5.22": {
+            "/.htaccess": "1c90b13d31f6ddd3607489b1de569f77"
+        },
+        "v5.5.28": {
+            "/.htaccess": "3881737db846579f9e86e19352d50773",
+            "/css/app.css": "3ede8f2085da46f757cf18357ce922ac",
+            "/favicon.ico": "d41d8cd98f00b204e9800998ecf8427e",
+            "/js/app.js": "2eaf111399ca4caf32f15cd83585f948",
+            "/robots.txt": "b6216d61c03e6ce0c9aea6ca7808f7ca",
+            "/web.config": "50e9a0f34b264670691691d406428d75"
+        }
+    },
+    "framework": "laravel",
+    "reverse_fingerprint": {
+        "v3.0.1": {
+            "/.htaccess": "e0485a208967ce084c439b796b420eda",
+            "/bundles/.gitignore": "d41d8cd98f00b204e9800998ecf8427e",
+            "/css/.gitignore": "d41d8cd98f00b204e9800998ecf8427e",
+            "/img/.gitignore": "d41d8cd98f00b204e9800998ecf8427e",
+            "/js/.gitignore": "d41d8cd98f00b204e9800998ecf8427e"
+        },
+        "v3.0.2": {},
+        "v3.0.3": {},
+        "v3.0.4": {},
+        "v3.1.0": {},
+        "v3.1.1": {},
+        "v3.1.2": {},
+        "v3.1.3": {},
+        "v3.1.4": {},
+        "v3.1.5": {},
+        "v3.1.6": {},
+        "v3.1.7": {},
+        "v3.1.8": {},
+        "v3.1.9": {},
+        "v3.2.0": {
+            "/favicon.ico": "d41d8cd98f00b204e9800998ecf8427e",
+            "/laravel/css/style.css": "f03ef4849bc6e724701475b36ca4cde1",
+            "/laravel/img/logoback.png": "6e5236ec6dd2cfa7bf732d309c661415",
+            "/laravel/js/modernizr-2.5.3.min.js": "5f7134b6937b1e0d30a68d74191970a4",
+            "/laravel/js/prettify.js": "e323de46c4065d11c92e8132fad3393b",
+            "/laravel/js/scroll.js": "bbc31ab24c41a74359ddf89addb446cc"
+        },
+        "v3.2.1": {
+            "/.htaccess": "341e16f9a331aefb420551aa0e4c723e",
+            "/laravel/css/style.css": "2c77b0dec20ab616d1c213e2fc18281f"
+        },
+        "v3.2.10": {},
+        "v3.2.11": {
+            "/laravel/css/style.css": "3e7890ce1d17033409efa1df4d1e2315"
+        },
+        "v3.2.12": {},
+        "v3.2.13": {},
+        "v3.2.3": {},
+        "v3.2.4": {},
+        "v3.2.5": {},
+        "v3.2.6": {},
+        "v3.2.7": {},
+        "v3.2.8": {},
+        "v3.2.9": {},
+        "v4.0.0": {
+            "/.htaccess": "b9820d58c8a00aad106062f175c28de4",
+            "/css/.gitignore": "",
+            "/img/.gitignore": "",
+            "/js/.gitignore": "",
+            "/laravel/css/style.css": "",
+            "/laravel/img/logoback.png": "",
+            "/laravel/js/modernizr-2.5.3.min.js": "",
+            "/laravel/js/prettify.js": "",
+            "/laravel/js/scroll.js": "",
+            "/packages/.gitkeep": "d41d8cd98f00b204e9800998ecf8427e",
+            "/robots.txt": "d3b8d8cde26b65f660ff8f8b0879ee94"
+        },
+        "v4.0.4": {},
+        "v4.0.6": {
+            "/.htaccess": "e84d5c2f68acc87399ccb75a85489d23"
+        },
+        "v4.1.0": {
+            "/.htaccess": "2fcb2cecbf897887d1b8eccaca289524"
+        },
+        "v4.1.18": {
+            "/.htaccess": "ca57a3a7cc91df631bd8a35aa14c87d3"
+        },
+        "v4.1.27": {
+            "/robots.txt": "b6216d61c03e6ce0c9aea6ca7808f7ca"
+        },
+        "v5.0.0": {
+            "/css/app.css": "e59a27f7d83cb7f617125ebd7d34ceb0",
+            "/packages/.gitkeep": ""
+        },
+        "v5.0.16": {
+            "/fonts/glyphicons-halflings-regular.eot": "f4769f9bdb7466be65088239c12046d1",
+            "/fonts/glyphicons-halflings-regular.svg": "89889688147bd7575d6327160d64e760",
+            "/fonts/glyphicons-halflings-regular.ttf": "e18bbf611f2a2e43afc071aa2f4e1512",
+            "/fonts/glyphicons-halflings-regular.woff": "fa2772327f55d8198301fdb8bcfc8158",
+            "/fonts/glyphicons-halflings-regular.woff2": "448c34a56d699c29117adc64c43affeb"
+        },
+        "v5.1.0": {
+            "/css/app.css": "",
+            "/fonts/glyphicons-halflings-regular.eot": "",
+            "/fonts/glyphicons-halflings-regular.svg": "",
+            "/fonts/glyphicons-halflings-regular.ttf": "",
+            "/fonts/glyphicons-halflings-regular.woff": "",
+            "/fonts/glyphicons-halflings-regular.woff2": ""
+        },
+        "v5.1.33": {
+            "/web.config": "96201a0f56eea4854606addb599b2104"
+        },
+        "v5.1.4": {
+            "/.htaccess": "cd898c9fbef41c635cee1a5ad20e0699"
+        },
+        "v5.2.15": {
+            "/.htaccess": "cbc8446d5fa1ae11b44fdd90975ca82e",
+            "/web.config": "50e9a0f34b264670691691d406428d75"
+        },
+        "v5.3.0": {
+            "/css/app.css": "f106d7a5140a00919421b58c54ad3f67",
+            "/js/app.js": "d190c036aac5ce41db653e6b6979fef8",
+            "/web.config": ""
+        },
+        "v5.3.10": {
+            "/web.config": "50e9a0f34b264670691691d406428d75"
+        },
+        "v5.4.0": {
+            "/css/app.css": "bbf0f18ae1bfb0c5a7d38b7b9c6ab960",
+            "/js/app.js": "b2da3c53b3c82ae89e91ae322fcc1202"
+        },
+        "v5.4.16": {},
+        "v5.4.23": {
+            "/css/app.css": "dae5430b7e71930b33a671e6b925a4f4",
+            "/js/app.js": "20eb22d13b4f96dd7836c10645cd1ec5"
+        },
+        "v5.5.0": {
+            "/.htaccess": "25ddd864bbdb8e824ffffd621b84a678"
+        },
+        "v5.5.22": {
+            "/.htaccess": "1c90b13d31f6ddd3607489b1de569f77",
+            "/css/app.css": "3ede8f2085da46f757cf18357ce922ac",
+            "/js/app.js": "2eaf111399ca4caf32f15cd83585f948"
+        },
+        "v5.5.28": {
+            "/.htaccess": "3881737db846579f9e86e19352d50773"
+        }
+    },
+    "versions": [
+        "v5.5.28",
+        "v5.5.22",
+        "v5.5.0",
+        "v5.4.30",
+        "v5.4.23",
+        "v5.4.21",
+        "v5.4.19",
+        "v5.4.16",
+        "v5.4.15",
+        "v5.4.9",
+        "v5.4.3",
+        "v5.4.0",
+        "v5.3.30",
+        "v5.3.16",
+        "v5.3.10",
+        "v5.3.0",
+        "v5.2.31",
+        "v5.2.29",
+        "v5.2.27",
+        "v5.2.24",
+        "v5.2.23",
+        "v5.2.15",
+        "v5.2.0",
+        "v5.1.33",
+        "v5.1.11",
+        "v5.1.4",
+        "v5.1.3",
+        "v5.1.1",
+        "v5.1.0",
+        "v5.0.22",
+        "v5.0.16",
+        "v5.0.1",
+        "v5.0.0",
+        "v4.2.11",
+        "v4.2.0",
+        "v4.1.27",
+        "v4.1.18",
+        "v4.1.0",
+        "v4.0.9",
+        "v4.0.8",
+        "v4.0.7",
+        "v4.0.6",
+        "v4.0.5",
+        "v4.0.4",
+        "v4.0.0",
+        "v3.2.14",
+        "v3.2.13",
+        "v3.2.12",
+        "v3.2.11",
+        "v3.2.10",
+        "v3.2.9",
+        "v3.2.8",
+        "v3.2.7",
+        "v3.2.6",
+        "v3.2.5",
+        "v3.2.4",
+        "v3.2.3",
+        "v3.2.1",
+        "v3.2.0",
+        "v3.1.9",
+        "v3.1.8",
+        "v3.1.7",
+        "v3.1.6",
+        "v3.1.5",
+        "v3.1.4",
+        "v3.1.3",
+        "v3.1.2",
+        "v3.1.1",
+        "v3.1.0",
+        "v3.0.4",
+        "v3.0.3",
+        "v3.0.2",
+        "v3.0.1",
+        "v3.0.0"
+    ]
+}
