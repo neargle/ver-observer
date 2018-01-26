@@ -94,7 +94,7 @@ class ProjectInfo(object):
         # Only return final version.
         pat = re.compile(r'^v?[0-9\.]+$')
         versions = sorted(
-            [str2version(ver_.lstrip('v')) for ver_ in lines if pat.match(ver_)],
+            [str2version(ver_) for ver_ in lines if pat.match(ver_)],
             reverse=True
         )
         return versions
@@ -210,7 +210,7 @@ class ProjectInfo(object):
         disable_suffix = self.info_result.get('disable_suffix')
         def _remove(fingerprint):
             for _, verinfo in fingerprint.items():
-                for path in verinfo:
+                for path in list(verinfo):
                     # disable endswith suffixs
                     matchs = (
                         path.endswith(s_) \
