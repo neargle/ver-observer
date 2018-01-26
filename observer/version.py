@@ -125,7 +125,7 @@ def calc(version_compare_set):
     lst = sorted(lst, key=_get_version)
     if _check(lst):
         if len(lst) == 1:
-            show_output(''.join(lst[0]))
+            show_output(' '.join(lst[0]))
             return lst
         for prev_, next_ in zip(lst[:-1], lst[1:]):
             if prev_[0].strip('=') == '>' \
@@ -138,7 +138,9 @@ def calc(version_compare_set):
                 show_output(AsciiTable(lst).table)
                 return [prev_, next_]
         if lst[0][0].strip('=') == ">":
-            return lst[-1]
+            res = lst[-1]
         else:
-            return lst[0]
+            res = lst[0]
+        show_output(' '.join(res))
+        return res
     sys.exit()
