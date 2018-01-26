@@ -137,4 +137,8 @@ def calc(version_compare_set):
                 ]
                 show_output(AsciiTable(lst).table)
                 return [prev_, next_]
-    return []
+        if lst[0][0].strip('=') == ">":
+            return lst[-1]
+        else:
+            return lst[0]
+    sys.exit()
