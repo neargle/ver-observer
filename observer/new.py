@@ -52,16 +52,18 @@ class ProjectInfo(object):
         self.target_project_path = os.path.realpath(target_project_path)
         if not os.path.isabs(static_path):
             static_path = os.path.join(self.target_project_path, static_path)
+
+        self.info_result = self.default_info_result
+        self.framework_name = framework_name
         self.static_path = static_path
         self.web_static_root = web_static_root
         self.version_lst = self.all_version()
-        self.make_result(framework_name)
 
 
-    def make_result(self, framework_name):
+    def make_result(self):
         """Make info_result."""
+        framework_name = self.framework_name
         logger.info('functions has done. init the result and set the name and alias.')
-        self.info_result = self.default_info_result
         self.info_result['framework'] = framework_name
         self.add_alias(framework_name)
         logger.info('set the all versions.')
@@ -117,6 +119,8 @@ class ProjectInfo(object):
         _dic_link = self.info_result[keyname][last_ver] = {}
 
         for filepath in static_file_lst:
+            if self._is_disable_suffix(filepath):
+                continue
             md5_string = file_hash(filepath)
             web_file = self.web_file_path(filepath)
             _dic_link[web_file] = md5_string
@@ -146,6 +150,8 @@ class ProjectInfo(object):
                 continue
             _dic_link = self.info_result[keyname][prev] = {}
             for filename in filelst:
+                if self._is_disable_suffix(filename):
+                    continue
                 hash_string = self.ancestor_file(prev, filename)
                 web_file = self.web_file_path(filename)
                 _dic_link[web_file] = hash_string
@@ -224,9 +230,16 @@ class ProjectInfo(object):
             _remove(fingerprint)
 
 
+    def _is_disable_suffix(self, filepath):
+        disable_suffix = self.info_result.get('disable_suffix')
+        matchs = (path.endswith(s_) for s_ in disable_suffix)
+        if any(matchs):
+            return True
+        return False
+
+
     def dump_result(self, filename):
         """Dump info_result to file."""
         path = os.path.realpath(filename)
-        self._disable_suffix_file()
         with open(path, 'w') as _fp:
             json.dump(self.info_result, _fp, indent=4, sort_keys=True)
