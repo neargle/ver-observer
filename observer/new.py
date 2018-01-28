@@ -10,6 +10,8 @@ import subprocess
 from urllib.parse import urljoin
 
 from utils.log import LOGGER as logger
+from utils.base import project_path
+from utils.var import PLUGIN_PATH
 from .version import str2version
 from . import file_hash, byte_hash
 
@@ -243,3 +245,29 @@ class ProjectInfo(object):
         path = os.path.realpath(filename)
         with open(path, 'w') as _fp:
             json.dump(self.info_result, _fp, indent=4, sort_keys=True)
+
+
+def option_interface(
+        framework_name, target_project_path,
+        static_path, web_static_root, alias, dis_suffix
+    ):
+    """for new subcommand."""
+    if not framework_name:
+        framework_name = os.path.basename(target_project_path)
+    static_path = os.path.realpath(static_path)
+    pinfo = ProjectInfo(
+        framework_name,
+        target_project_path,
+        static_path,
+        web_static_root
+    )
+
+    if alias:
+        pinfo.add_alias(*alias)
+    if dis_suffix:
+        pinfo.add_filter_suffix(*dis_suffix)
+
+    pinfo.make_result()
+    pinfo.dump_result(
+        os.path.join(project_path(), PLUGIN_PATH, "{}.json".format(framework_name))
+    )

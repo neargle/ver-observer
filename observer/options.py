@@ -8,6 +8,7 @@ import argparse
 
 from utils.log import init_log
 from utils.var import DEFAULT_FILEPATH, DEFAULT_LOGGING_LEVEL
+from .new import option_interface
 
 from .calls import show_all
 
@@ -23,16 +24,31 @@ def call_parser():
 
     args = parser.parse_args()
 
+    # set logger
+    if args.verbose:
+        args.level = 'verbose'
+    init_log(args.level, args.logfile)
+
     # option: -a/-all
     if args.all:
         show_all()
         parser.exit()
 
-    # set logger
-    if args.verbose:
-        args.level = 'verbose'
-
-    init_log(args.level, args.logfile)
+    try:
+        sub = getattr(args, 'which')
+    except AttributeError:
+        pass
+    else:
+        if sub == 'new':
+            option_interface(
+                framework_name=args.framework_name,
+                target_project_path=args.dir,
+                static_path=args.static_path,
+                web_static_root=args.web_static_root,
+                alias=args.alias,
+                dis_suffix=args.dis_suffix
+            )
+        parser.exit()
 
     return args
 
@@ -86,6 +102,56 @@ def make_parser():
         '--level',
         type=str,
         default=DEFAULT_LOGGING_LEVEL,
-        help='logger level, select in "CRITICAL, ERROR, WARNING, INFO, VERBOSE, DEBUG, TRACE, NOISE, LOWEST"'
+        help='logger level, select in '
+        '"CRITICAL, ERROR, WARNING, INFO, VERBOSE, DEBUG, TRACE, NOISE, LOWEST"'
+    )
+
+    # new a plugin
+    subparsers = parser.add_subparsers(help='sub-command help')
+    new_parser = subparsers.add_parser(
+        'new',
+        help='add a new plugin infomation of framework or cms'
+    )
+    new_parser.set_defaults(which='new')
+    new_parser.add_argument(
+        '-n',
+        '--framework-name',
+        type=str,
+        default='',
+        help='name of web framework or CMS, like django'
+    )
+    new_parser.add_argument(
+        '-d',
+        '--dir',
+        type=str,
+        required=True,
+        help='path to the git project of web framework'
+    )
+    new_parser.add_argument(
+        '-s',
+        '--static-path',
+        type=str,
+        required=True,
+        help='the directory of static file (.css file, .ico file) in project'
+    )
+    new_parser.add_argument(
+        '-w',
+        '--web-static-root',
+        type=str,
+        default='/',
+        help='file root path in real web file'
+    )
+    new_parser.add_argument(
+        '--alias',
+        nargs='+',
+        type=str,
+        help='set alias, usage: `--alias laravel-php laravel`'
+    )
+    new_parser.add_argument(
+        '--dis-suffix',
+        nargs='+',
+        type=str,
+        help='set file suffix that is not static file in web, usage: '
+        '`--dis-suffix php asp`'
     )
     return parser
