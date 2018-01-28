@@ -52,8 +52,9 @@ class ProjectInfo(object):
         web_static_root = os.path.expanduser(web_static_root)
 
         self.target_project_path = os.path.realpath(target_project_path)
-        if not os.path.isabs(static_path):
-            static_path = os.path.join(self.target_project_path, static_path)
+        # if not os.path.isabs(static_path):
+        #     static_path = os.path.join(self.target_project_path, static_path)
+        static_path = os.path.realpath(static_path)
 
         self.info_result = self.default_info_result
         self.framework_name = framework_name
@@ -254,7 +255,6 @@ def option_interface(
     """for new subcommand."""
     if not framework_name:
         framework_name = os.path.basename(target_project_path)
-    static_path = os.path.realpath(static_path)
     pinfo = ProjectInfo(
         framework_name,
         target_project_path,
