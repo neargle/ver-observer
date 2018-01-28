@@ -6,6 +6,9 @@
 import sys
 import argparse
 
+from utils.log import init_log
+from utils.var import DEFAULT_FILEPATH, DEFAULT_LOGGING_LEVEL
+
 from .calls import show_all
 
 
@@ -24,6 +27,12 @@ def call_parser():
     if args.all:
         show_all()
         parser.exit()
+
+    # set logger
+    if args.verbose:
+        args.level = 'verbose'
+
+    init_log(args.level, args.logfile)
 
     return args
 
@@ -60,5 +69,23 @@ def make_parser():
         '--all',
         action='store_true',
         help='show all plugin introduction'
+    )
+    parser.add_argument(
+        '-v',
+        '--verbose',
+        action='store_true',
+        help='set logger level to "VERBOSE"'
+    )
+    parser.add_argument(
+        '--logfile',
+        type=str,
+        default=DEFAULT_FILEPATH,
+        help='log file path'
+    )
+    parser.add_argument(
+        '--level',
+        type=str,
+        default=DEFAULT_LOGGING_LEVEL,
+        help='logger level, select in "CRITICAL, ERROR, WARNING, INFO, VERBOSE, DEBUG, TRACE, NOISE, LOWEST"'
     )
     return parser
