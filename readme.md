@@ -1,5 +1,10 @@
 # VER-OBSERVER
 
+[![GitHub issues](https://img.shields.io/github/issues/neargle/ver-observer.svg?style=flat-square)](https://github.com/neargle/ver-observer/issues)
+[![](https://img.shields.io/github/commits-since/neargle/ver-observer/0.1.0.svg?style=flat-square)](https://github.com/neargle/ver-observer/commits/master)
+[![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg?style=flat-square)](https://www.python.org/) 
+[![GitHub license](https://img.shields.io/badge/license-GPLv3-blue.svg?style=flat-square)](https://github.com/neargle/ver-observer/blob/master/LICENSE)
+
 Detection version of Web framework or CMS or dev-dependence on target website.
 
 ## EXAMPLE
@@ -31,6 +36,13 @@ python vobserver.py -u http://127.0.0.1:8000/ -d django -v
 [![asciicast](https://asciinema.org/a/ua1WOqMkUummi25QxImlFRNpN.png)](https://asciinema.org/a/ua1WOqMkUummi25QxImlFRNpN)
 
 New a plugin of django.
+
+```
+python vobserver.py -a
+git clone https://github.com/django/django.git /tmp/django_git_project
+python vobserver.py -v new -n django -d /tmp/django_git_project -s /tmp/django_git_project/django/contrib/admin/static -w /static/ --alias django-framework django-admin --dis-suffix php asp
+python vobserver.py -a
+```
 
 [![asciicast](https://asciinema.org/a/2x0lpXDl9YjsYOMgwAQ8UNtjA.png)](https://asciinema.org/a/2x0lpXDl9YjsYOMgwAQ8UNtjA)
 
@@ -79,6 +91,6 @@ optional arguments:
 
 Third-party from great developer and friends in [etx/](https://github.com/neargle/ver-observer/tree/master/ext).
 
-err_hunter & version_utils by @aploium
-terminaltables by @robpol86
+- err_hunter & version_utils by @aploium
+- terminaltables by @robpol86
 
