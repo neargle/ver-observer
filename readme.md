@@ -9,9 +9,17 @@ Detection version of Web framework or CMS or dev-dependence on target website.
 
 ## EXAMPLE
 
-> python vobserver.py -u https://www.xxx.com/ -d django -v
+for django v2.0.1:
+
+> python vobserver.py -u https://www.xxx.com/ -d django
 
 ![](http://ww1.sinaimg.cn/large/005y7Ba5ly1fnxbwmiawrj31c70w4gsj.jpg)
+
+for django v1.9:
+
+> python vobserver.py -u https://www.xxx.com/ -d django -v
+
+![](http://ww1.sinaimg.cn/large/005y7Ba5ly1fnxjltmhxvj30py0bf417.jpg)
 
 New a plugin of framework or CMS. You should clone it to the local first. For example: clone django project to /tmp/django. And: 
 
