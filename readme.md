@@ -1,17 +1,43 @@
-# ver-observer
+# VER-OBSERVER
 
-一定程度上能检测 Web 站点所用的依赖或者框架的版本。太晚了文档和图片明天换。
+Detection version of Web framework or CMS or dev-dependence on target website.
 
-## example
+## EXAMPLE
 
 > python vobserver.py -u https://www.xxx.com/ -d django -v
 
-![](http://ww1.sinaimg.cn/large/005y7Ba5ly1fnwuf9pjzjj31cf0lktap.jpg)
+![](http://ww1.sinaimg.cn/large/005y7Ba5ly1fnxbwmiawrj31c70w4gsj.jpg)
 
-## usage & help
+### VIDEO
+
+New a django website and ver-observer it.
 
 ```bash
-> python vobserver.py -h                                                                                                           master [ad62f1c] untracked
+python vobserver.py -a
+pip freeze | grep Django
+django-admin startproject vobserver_test
+python vobserver_test/manage.py runserver > /dev/null 2>&1 &
+python vobserver.py -u http://127.0.0.1:8000/ -d django -v
+```
+
+[![asciicast](https://asciinema.org/a/ua1WOqMkUummi25QxImlFRNpN.png)](https://asciinema.org/a/ua1WOqMkUummi25QxImlFRNpN)
+
+
+## USAGE & HELP
+
+```bash
+
+                        _
+                       | |
+__   _____ _ __    ___ | |__  ___  ___ _ ____   _____ _ __
+\ \ / / _ \ '__|  / _ \| '_ \/ __|/ _ \ '__\ \ / / _ \ '__|
+ \ V /  __/ |    | (_) | |_) \__ \  __/ |   \ V /  __/ |
+  \_/ \___|_|     \___/|_.__/|___/\___|_|    \_/ \___|_|
+
+                            github.com/neargle/ver-observer
+                                                v0.1.0 beta
+
+
 usage: vobserver.py [-h] [-u URL] [-d DEPEND] [--depth DEPTH] [-a] [-v]
                     [--logfile LOGFILE] [--level LEVEL]
                     {new} ...
@@ -37,6 +63,3 @@ optional arguments:
   --level LEVEL         logger level, select in "CRITICAL, ERROR, WARNING,
                         INFO, VERBOSE, DEBUG, TRACE, NOISE, LOWEST"
 ```
-
-
-
