@@ -1,8 +1,13 @@
 {
     "alias": [
+        "django-framework",
+        "django-admin",
         "django"
     ],
-    "disable_suffix": [],
+    "disable_suffix": [
+        "php",
+        "asp"
+    ],
     "fingerprint": {
         "1.10.8": {
             "/static/admin/css/base.css": "ba3dc2f88fc5eea98eb4dbfd43387476",

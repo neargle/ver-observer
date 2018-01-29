@@ -8,6 +8,14 @@ Detection version of Web framework or CMS or dev-dependence on target website.
 
 ![](http://ww1.sinaimg.cn/large/005y7Ba5ly1fnxbwmiawrj31c70w4gsj.jpg)
 
+New a plugin of framework or CMS. You should clone it to the local first. For example: clone django project to /tmp/django. And: 
+
+> python vobserver.py new -d /tmp/django -s /tmp/django/django/contrib/admin/static -w /static/
+
+More info:
+
+> python vobserver.py new -h
+
 ### VIDEO
 
 New a django website and ver-observer it.
@@ -22,6 +30,9 @@ python vobserver.py -u http://127.0.0.1:8000/ -d django -v
 
 [![asciicast](https://asciinema.org/a/ua1WOqMkUummi25QxImlFRNpN.png)](https://asciinema.org/a/ua1WOqMkUummi25QxImlFRNpN)
 
+New a plugin of django.
+
+[![asciicast](https://asciinema.org/a/2x0lpXDl9YjsYOMgwAQ8UNtjA.png)](https://asciinema.org/a/2x0lpXDl9YjsYOMgwAQ8UNtjA)
 
 ## USAGE & HELP
 
@@ -63,3 +74,11 @@ optional arguments:
   --level LEVEL         logger level, select in "CRITICAL, ERROR, WARNING,
                         INFO, VERBOSE, DEBUG, TRACE, NOISE, LOWEST"
 ```
+
+## THIRD-PARTY 
+
+Third-party from great developer and friends in [etx/](https://github.com/neargle/ver-observer/tree/master/ext).
+
+err_hunter & version_utils by @aploium
+terminaltables by @robpol86
+
