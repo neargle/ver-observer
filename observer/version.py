@@ -123,7 +123,7 @@ def calc(version_compare_set):
             if compare != compare_lst[-1]:
                 compare_lst.append(compare)
         length = len(compare_lst)
-        if 0 < length < 3:
+        if version_compare_lst and 0 < length < 3:
             return True
         logger.warning('maybe framework or cms had be change by developer')
         if len(version_compare_lst) < 1:
@@ -140,6 +140,7 @@ def calc(version_compare_set):
 
     lst = list(version_compare_set)
     lst.sort(key=cmp_to_key(version_compare_sort))
+    logger.verbose('compare list after sort: %s', lst)
     if _check(lst):
         if len(lst) == 1:
             show_output(' '.join(lst[0]))

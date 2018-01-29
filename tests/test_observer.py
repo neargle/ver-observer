@@ -14,7 +14,7 @@ from observer.plugin import file_distribute, search
 from utils.log import LOGGER as logger
 from utils.common import file_md5, byte_md5
 from observer.scan import static_hash_map
-import config
+import utils.var
 
 try:
     from test_data import target_website
@@ -222,7 +222,7 @@ def static_hash_map_test():
 def make_version_test():
     logger.warning('make_version_test start!')
     import ext.err_hunter as err_hunter
-    from test_data import target_tmp_hash_map_all as target_tmp_hash_map
+    from test_data import target_tmp_hash_map3 as target_tmp_hash_map
     from observer.version import make_version
     django = search('django')
     logger.critical(
