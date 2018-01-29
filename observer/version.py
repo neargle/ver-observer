@@ -142,5 +142,5 @@ def calc(version_compare_set):
         else:
             res = lst[0]
         show_output(' '.join(res))
-        return res
+        return (res, )
     sys.exit()
