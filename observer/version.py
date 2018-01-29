@@ -98,18 +98,14 @@ def version_compare_sort(prev_, next_):
     version compare sort cmp function.
     compare version first and operate next.
     """
-    prev_ver = str2version(prev_[1])
-    next_ver = str2version(next_[1])
-    if prev_ver > next_ver:
-        return 1
-    elif prev_ver < next_ver:
+    def _cmp(pre, nex):
+        return (pre > nex) - (pre < nex)
+
+    if prev_[1] != next_[1]:
+        return _cmp(str2version(prev_[1]), str2version(next_[1]))
+    if prev_[0].strip('=') == '>':
         return -1
-    else:
-        # next_ver == prev_ver
-        if prev_[0].strip('=') == '>':
-            return -1
-        else:
-            return 1
+    return 1
 
 
 def calc(version_compare_set):
