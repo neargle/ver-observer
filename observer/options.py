@@ -9,12 +9,15 @@ import argparse
 from utils.log import init_log
 from utils.var import DEFAULT_FILEPATH, DEFAULT_LOGGING_LEVEL
 from .new import option_interface
-
 from .calls import show_all
+from .vars import APP_TITLE_ASCII_ART
 
 
 def call_parser():
     """call the args parser."""
+
+    print(APP_TITLE_ASCII_ART)
+
     parser = make_parser()
 
     # show help message when no option is given
@@ -56,7 +59,7 @@ def call_parser():
 def make_parser():
     """return the parser."""
 
-    desc_text = '''\
+    desc_text = '''
     A tool to detect that which version of web framework \
     using on the target website. \
     '''
