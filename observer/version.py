@@ -45,7 +45,8 @@ def match(static_map, fingerprint):
             # LICENSE or file change will make real_hash different
             if filehash and real_hash:
                 yield real_hash == filehash
-    return all(_gen_match())
+    all_match = [mat for mat in _gen_match()]
+    return all_match and all(all_match)
 
 
 def make_version(static_map, fingerprint_map, reverse=True):
@@ -92,10 +93,27 @@ def make_all(static_map, fingerprint):
     return version_compare_set
 
 
+def version_compare_sort(prev_, next_):
+    """
+    version compare sort cmp function.
+    compare version first and operate next.
+    """
+    prev_ver = str2version(prev_[1])
+    next_ver = str2version(next_[1])
+    if prev_ver > next_ver:
+        return -1
+    elif prev_ver < next_ver:
+        return 1
+    else:
+        # next_ver == prev_ver
+        if prev_[0].strip('=') == '>':
+            return 1
+        else:
+            return -1
+
+
 def calc(version_compare_set):
     """calcute version compare list."""
-    def _get_version(version_compare):
-        return str2version(version_compare[1])
 
     def _check(version_compare_lst):
         compare_lst = ['>']
@@ -122,7 +140,7 @@ def calc(version_compare_set):
             sys.exit()
 
     lst = list(version_compare_set)
-    lst = sorted(lst, key=_get_version)
+    lst.sort(cmp=version_compare_sort)
     if _check(lst):
         if len(lst) == 1:
             show_output(' '.join(lst[0]))
