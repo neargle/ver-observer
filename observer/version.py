@@ -7,7 +7,7 @@ about version.
 """
 
 import sys
-
+from functools import cmp_to_key
 from distutils.version import LooseVersion
 
 from utils.common import remove_blank
@@ -101,15 +101,15 @@ def version_compare_sort(prev_, next_):
     prev_ver = str2version(prev_[1])
     next_ver = str2version(next_[1])
     if prev_ver > next_ver:
-        return -1
-    elif prev_ver < next_ver:
         return 1
+    elif prev_ver < next_ver:
+        return -1
     else:
         # next_ver == prev_ver
         if prev_[0].strip('=') == '>':
-            return 1
-        else:
             return -1
+        else:
+            return 1
 
 
 def calc(version_compare_set):
@@ -122,7 +122,6 @@ def calc(version_compare_set):
             compare = compare.strip('=')
             if compare != compare_lst[-1]:
                 compare_lst.append(compare)
-
         length = len(compare_lst)
         if 0 < length < 3:
             return True
@@ -140,7 +139,7 @@ def calc(version_compare_set):
             sys.exit()
 
     lst = list(version_compare_set)
-    lst.sort(cmp=version_compare_sort)
+    lst.sort(key=cmp_to_key(version_compare_sort))
     if _check(lst):
         if len(lst) == 1:
             show_output(' '.join(lst[0]))
