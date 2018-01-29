@@ -52,7 +52,7 @@ python vobserver.py -v new -n django -d /tmp/django_git_project -s /tmp/django_g
 python vobserver.py -a
 ```
 
-[![asciicast](https://asciinema.org/a/2x0lpXDl9YjsYOMgwAQ8UNtjA.png)](https://asciinema.org/a/2x0lpXDl9YjsYOMgwAQ8UNtjA)
+[![asciicast](https://asciinema.org/a/eJUPNOKzIA9imNnlLs8hoYU04.png)](https://asciinema.org/a/eJUPNOKzIA9imNnlLs8hoYU04)
 
 ## USAGE & HELP
 
