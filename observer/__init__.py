@@ -46,11 +46,17 @@ def run():
     result_lst = [('possible version',)]
     for version_str in plugin_info.get('versions'):
         if all((cond.match(version_str) for cond in cond_lst)):
-            info = '{} v{}'.format(depend, version_str)
+            info = _add_prefix_v(depend, version_str)
             logger.verbose(info)
             result_lst.append((info,))
     show_output(AsciiTable(result_lst).table)
     sys.exit(0)
+
+
+def _add_prefix_v(depend, version_str):
+    if not version_str.startswith('v'):
+        version_str = 'v{}'.format(version_str)
+    return '{} {}'.format(depend, version_str)
 
 
 def check_run_options(args):
