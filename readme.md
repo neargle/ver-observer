@@ -9,6 +9,15 @@ Detection version of Web framework or CMS or dev-dependence on target website.
 
 [中文文档看这里](http://blog.neargle.com/2018/01/29/ver-observer-a-tool-about-version-detection/)
 
+## INSTALL
+
+```bash
+git clone https://github.com/neargle/ver-observer.git
+cd ver-observer
+pip install -r requirements.txt
+python3 vobserver.py
+```
+
 ## EXAMPLE
 
 for django v2.0.1:
