@@ -20,7 +20,7 @@
             "/static/admin/js/inlines.js": "17981b4df24a5b509f7b4544d7594ad8",
             "/static/admin/js/inlines.min.js": "8ef8b2379896480103c6dfd275634e93"
         },
-        "1.11.9": {
+        "1.11.13": {
             "/static/admin/css/autocomplete.css": "",
             "/static/admin/css/base.css": "5af66c1b1797cb8f865b443cea0dcc17",
             "/static/admin/css/responsive.css": "",
@@ -276,7 +276,7 @@
         "1.8.13": {
             "/static/admin/js/admin/RelatedObjectLookups.js": "b0bbaabc66ddf08f18c4fe0dd42e4868"
         },
-        "1.8.18": {
+        "1.8.19": {
             "/static/admin/css/base.css": "f0d165989b7752e133c251bea9ea637e",
             "/static/admin/css/changelists.css": "facd9faec460388a3a53d57f1a647214",
             "/static/admin/css/fonts.css": "",
@@ -412,7 +412,7 @@
             "/static/admin/js/admin/RelatedObjectLookups.js": "b3916e8770e872d88952acfca2afe82f",
             "/static/admin/js/vendor/xregexp/xregexp.js": ""
         },
-        "2.0.1": {
+        "2.0.5": {
             "/static/admin/css/autocomplete.css": "781713f306644a2be4cf51e8162e4cb2",
             "/static/admin/css/base.css": "17fd9d2dcc19d382930dcaf53a6d5212",
             "/static/admin/css/changelists.css": "f6dc691f8d626f3a0d90b09a734a533e",
@@ -940,8 +940,16 @@
         }
     },
     "versions": [
+        "2.0.5",
+        "2.0.4",
+        "2.0.3",
+        "2.0.2",
         "2.0.1",
         "2.0",
+        "1.11.13",
+        "1.11.12",
+        "1.11.11",
+        "1.11.10",
         "1.11.9",
         "1.11.8",
         "1.11.7",
@@ -975,6 +983,7 @@
         "1.9.2",
         "1.9.1",
         "1.9",
+        "1.8.19",
         "1.8.18",
         "1.8.17",
         "1.8.16",
