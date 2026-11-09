@@ -25,7 +25,7 @@ def all_plugin():
 
 def load(filepath):
     """return plugin info"""
-    with open(filepath, 'r') as _fp:
+    with open(filepath, 'r', encoding='utf-8') as _fp:
         return json.load(_fp, encoding='utf-8')
 
 
